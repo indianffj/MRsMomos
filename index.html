@@ -273,42 +273,71 @@ Order on WhatsApp
 </footer>
 
 <script>
-let cart=[];
+let cart = [];
 
-function addItem(item){
+function addCart(item) {
     cart.push(item);
-    document.getElementById("cart").innerHTML =
-    cart.map(x => "<li>"+x+"</li>").join("");
+    updateCart();
 }
 
-function sendOrder(){
+function removeItem(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
 
-    let name=document.getElementById("name").value;
-    let phone=document.getElementById("phone").value;
-    let date=document.getElementById("date").value;
-    let time=document.getElementById("time").value;
-    let notes=document.getElementById("notes").value;
+function updateCart() {
+    let html = "";
+
+    cart.forEach((item, index) => {
+        html += `
+        <li>
+            ${item}
+            <button onclick="removeItem(${index})"
+                    style="margin-left:10px;background:red;width:auto;padding:5px 10px;">
+                Remove
+            </button>
+        </li>
+        `;
+    });
+
+    document.getElementById("cart").innerHTML = html;
+}
+
+function sendOrder() {
+
+    if(cart.length === 0){
+        alert("Please add at least one item.");
+        return;
+    }
 
     let message =
 `🥟 MR's MOMOS ORDER
 
-Name: ${name}
-Phone: ${phone}
+Name:
+${document.getElementById("name").value}
 
-Pickup Date: ${date}
-Pickup Time: ${time}
+Phone:
+${document.getElementById("phone").value}
+
+Pickup Date:
+${document.getElementById("date").value}
+
+Pickup Time:
+${document.getElementById("time").value}
 
 Items:
 ${cart.join("\n")}
 
 Notes:
-${notes}`;
+${document.getElementById("note").value}
+`;
 
-    let url =
-"https://wa.me/18252505474?text=" +
-encodeURIComponent(message);
+    let whatsapp = "18252505474";
 
-    window.open(url,"_blank");
+    window.open(
+        "https://wa.me/" + whatsapp + "?text=" + encodeURIComponent(message),
+        "_blank"
+    );
 }
 </script>
 
