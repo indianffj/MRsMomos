@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MR's Momos</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f8f8f8;
+}
+
+header{
+    background:#d62828;
+    color:white;
+    text-align:center;
+    padding:30px 20px;
+}
+
+header h1{
+    font-size:38px;
+}
+
+header p{
+    margin-top:10px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:15px;
+}
+
+.price{
+    color:#d62828;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+button{
+    width:100%;
+    border:none;
+    background:#d62828;
+    color:white;
+    padding:10px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.order-box{
+    background:white;
+    padding:20px;
+    margin-top:30px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+input, select, textarea{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+.cart{
+    margin:15px 0;
+}
+
+.review{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.whatsapp{
+    background:#25D366;
+    font-size:16px;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🥟 MR's Momos</h1>
+<p>Fresh • Hot • Delicious</p>
+</header>
+
+<div class="container">
+
+<h2>Our Menu</h2>
+<br>
+
+<div class="menu">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800" alt="">
+<div class="card-content">
+<h3>Veg Steamed Momos</h3>
+<p class="price">$9.99</p>
+<button onclick="addItem('Veg Steamed Momos - $9.99')">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800" alt="">
+<div class="card-content">
+<h3>Chicken Steamed Momos</h3>
+<p class="price">$10.99</p>
+<button onclick="addItem('Chicken Steamed Momos - $10.99')">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800" alt="">
+<div class="card-content">
+<h3>Paneer Momos</h3>
+<p class="price">$10.99</p>
+<button onclick="addItem('Paneer Momos - $10.99')">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=800" alt="">
+<div class="card-content">
+<h3>Veg Fried Momos</h3>
+<p class="price">$10.99</p>
+<button onclick="addItem('Veg Fried Momos - $10.99')">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800" alt="">
+<div class="card-content">
+<h3>Chicken Fried Momos</h3>
+<p class="price">$11.99</p>
+<button onclick="addItem('Chicken Fried Momos - $11.99')">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800" alt="">
+<div class="card-content">
+<h3>Paneer Fried Momos</h3>
+<p class="price">$11.99</p>
+<button onclick="addItem('Paneer Fried Momos - $11.99')">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="">
+<div class="card-content">
+<h3>Tandoori Veg Momos</h3>
+<p class="price">$12.99</p>
+<button onclick="addItem('Tandoori Veg Momos - $12.99')">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800" alt="">
+<div class="card-content">
+<h3>Tandoori Chicken Momos</h3>
+<p class="price">$13.99</p>
+<button onclick="addItem('Tandoori Chicken Momos - $13.99')">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800" alt="">
+<div class="card-content">
+<h3>Masala Fries</h3>
+<p class="price">$5.99</p>
+<button onclick="addItem('Masala Fries - $5.99')">Add to Cart</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800" alt="">
+<div class="card-content">
+<h3>Cold Drink</h3>
+<p class="price">$2.49</p>
+<button onclick="addItem('Cold Drink - $2.49')">Add to Cart</button>
+</div>
+</div>
+
+</div>
+
+<div class="order-box">
+
+<h2>Place Your Order</h2>
+
+<label>Name</label>
+<input type="text" id="name">
+
+<label>Phone Number</label>
+<input type="text" id="phone">
+
+<label>Pickup Date</label>
+<input type="date" id="date">
+
+<label>Pickup Time</label>
+<input type="time" id="time">
+
+<label>Special Instructions</label>
+<textarea id="notes"></textarea>
+
+<h3>Your Cart</h3>
+<ul id="cart" class="cart"></ul>
+
+<button class="whatsapp" onclick="sendOrder()">
+Order on WhatsApp
+</button>
+
+</div>
+
+<h2 style="margin-top:30px;">Customer Reviews</h2>
+
+<div class="review">
+⭐⭐⭐⭐⭐ Amazing Momos! Fresh and tasty.
+</div>
+
+<div class="review">
+⭐⭐⭐⭐⭐ Best spicy chutney in town.
+</div>
+
+<div class="review">
+⭐⭐⭐⭐⭐ Quick pickup and great service.
+</div>
+
+</div>
+
+<footer>
+© 2026 MR's Momos
+</footer>
+
+<script>
+let cart=[];
+
+function addItem(item){
+    cart.push(item);
+    document.getElementById("cart").innerHTML =
+    cart.map(x => "<li>"+x+"</li>").join("");
+}
+
+function sendOrder(){
+
+    let name=document.getElementById("name").value;
+    let phone=document.getElementById("phone").value;
+    let date=document.getElementById("date").value;
+    let time=document.getElementById("time").value;
+    let notes=document.getElementById("notes").value;
+
+    let message =
+`🥟 MR's MOMOS ORDER
+
+Name: ${name}
+Phone: ${phone}
+
+Pickup Date: ${date}
+Pickup Time: ${time}
+
+Items:
+${cart.join("\n")}
+
+Notes:
+${notes}`;
+
+    let url =
+"https://wa.me/18252505474?text=" +
+encodeURIComponent(message);
+
+    window.open(url,"_blank");
+}
+</script>
+
+</body>
+</html>
