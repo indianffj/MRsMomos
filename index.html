@@ -6,72 +6,49 @@
 <title>MR's Momos</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
 body{
+    font-family: Arial, sans-serif;
+    margin:0;
     background:#f8f8f8;
 }
 
 header{
-    background:#d62828;
+    background:#c62828;
     color:white;
     text-align:center;
     padding:30px 20px;
 }
 
-header h1{
-    font-size:38px;
-}
-
-header p{
-    margin-top:10px;
-}
-
 .container{
-    max-width:1200px;
+    max-width:1100px;
     margin:auto;
     padding:20px;
 }
 
 .menu{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
 }
 
 .card{
     background:white;
-    border-radius:12px;
-    overflow:hidden;
+    border-radius:10px;
+    padding:15px;
     box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-.card img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-}
-
-.card-content{
-    padding:15px;
-}
-
 .price{
-    color:#d62828;
+    color:#c62828;
     font-weight:bold;
-    margin:10px 0;
+    font-size:18px;
 }
 
-button{
-    width:100%;
-    border:none;
-    background:#d62828;
+.add-btn{
+    background:#c62828;
     color:white;
+    border:none;
+    width:100%;
     padding:10px;
     border-radius:6px;
     cursor:pointer;
@@ -79,41 +56,67 @@ button{
 
 .order-box{
     background:white;
+    margin-top:25px;
     padding:20px;
-    margin-top:30px;
-    border-radius:12px;
+    border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-input, select, textarea{
+input, textarea{
     width:100%;
-    padding:12px;
-    margin-top:8px;
+    padding:10px;
+    margin-top:5px;
     margin-bottom:15px;
     border:1px solid #ddd;
     border-radius:6px;
 }
 
-.cart{
-    margin:15px 0;
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+    border-bottom:1px solid #eee;
+    padding-bottom:10px;
 }
 
-.review{
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    margin-top:10px;
+.qty-btn{
+    padding:4px 10px;
+    margin:0 3px;
+    cursor:pointer;
+}
+
+.remove-btn{
+    background:red;
+    color:white;
+    border:none;
+    padding:5px 10px;
+    border-radius:5px;
+    cursor:pointer;
 }
 
 .whatsapp{
     background:#25D366;
+    color:white;
+    border:none;
+    width:100%;
+    padding:14px;
+    border-radius:6px;
     font-size:16px;
+    cursor:pointer;
 }
 
-footer{
-    text-align:center;
-    padding:25px;
-    margin-top:30px;
+.review{
+    background:white;
+    margin-top:10px;
+    padding:15px;
+    border-radius:10px;
+}
+
+.total{
+    font-size:20px;
+    font-weight:bold;
+    margin-top:15px;
 }
 </style>
 </head>
@@ -121,112 +124,29 @@ footer{
 <body>
 
 <header>
-<h1>🥟 MR's Momos</h1>
-<p>Fresh • Hot • Delicious</p>
+    <h1>🥟 MR's Momos</h1>
+    <p>Fresh • Hot • Delicious</p>
 </header>
 
 <div class="container">
 
 <h2>Our Menu</h2>
-<br>
 
-<div class="menu">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800" alt="">
-<div class="card-content">
-<h3>Veg Steamed Momos</h3>
-<p class="price">$9.99</p>
-<button onclick="addItem('Veg Steamed Momos - $9.99')">Add to Cart</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800" alt="">
-<div class="card-content">
-<h3>Chicken Steamed Momos</h3>
-<p class="price">$10.99</p>
-<button onclick="addItem('Chicken Steamed Momos - $10.99')">Add to Cart</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800" alt="">
-<div class="card-content">
-<h3>Paneer Momos</h3>
-<p class="price">$10.99</p>
-<button onclick="addItem('Paneer Momos - $10.99')">Add to Cart</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=800" alt="">
-<div class="card-content">
-<h3>Veg Fried Momos</h3>
-<p class="price">$10.99</p>
-<button onclick="addItem('Veg Fried Momos - $10.99')">Add to Cart</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800" alt="">
-<div class="card-content">
-<h3>Chicken Fried Momos</h3>
-<p class="price">$11.99</p>
-<button onclick="addItem('Chicken Fried Momos - $11.99')">Add to Cart</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800" alt="">
-<div class="card-content">
-<h3>Paneer Fried Momos</h3>
-<p class="price">$11.99</p>
-<button onclick="addItem('Paneer Fried Momos - $11.99')">Add to Cart</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="">
-<div class="card-content">
-<h3>Tandoori Veg Momos</h3>
-<p class="price">$12.99</p>
-<button onclick="addItem('Tandoori Veg Momos - $12.99')">Add to Cart</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800" alt="">
-<div class="card-content">
-<h3>Tandoori Chicken Momos</h3>
-<p class="price">$13.99</p>
-<button onclick="addItem('Tandoori Chicken Momos - $13.99')">Add to Cart</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=800" alt="">
-<div class="card-content">
-<h3>Masala Fries</h3>
-<p class="price">$5.99</p>
-<button onclick="addItem('Masala Fries - $5.99')">Add to Cart</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800" alt="">
-<div class="card-content">
-<h3>Cold Drink</h3>
-<p class="price">$2.49</p>
-<button onclick="addItem('Cold Drink - $2.49')">Add to Cart</button>
-</div>
-</div>
-
-</div>
+<div class="menu" id="menu"></div>
 
 <div class="order-box">
 
-<h2>Place Your Order</h2>
+<h2>Your Cart</h2>
+
+<div id="cartItems"></div>
+
+<div class="total">
+Total: CAD $<span id="total">0.00</span>
+</div>
+
+<hr><br>
+
+<h2>Customer Details</h2>
 
 <label>Name</label>
 <input type="text" id="name">
@@ -235,16 +155,13 @@ footer{
 <input type="text" id="phone">
 
 <label>Pickup Date</label>
-<input type="date" id="date">
+<input type="date" id="pickupDate">
 
 <label>Pickup Time</label>
-<input type="time" id="time">
+<input type="time" id="pickupTime">
 
 <label>Special Instructions</label>
 <textarea id="notes"></textarea>
-
-<h3>Your Cart</h3>
-<ul id="cart" class="cart"></ul>
 
 <button class="whatsapp" onclick="sendOrder()">
 Order on WhatsApp
@@ -254,91 +171,172 @@ Order on WhatsApp
 
 <h2 style="margin-top:30px;">Customer Reviews</h2>
 
-<div class="review">
-⭐⭐⭐⭐⭐ Amazing Momos! Fresh and tasty.
-</div>
-
-<div class="review">
-⭐⭐⭐⭐⭐ Best spicy chutney in town.
-</div>
-
-<div class="review">
-⭐⭐⭐⭐⭐ Quick pickup and great service.
-</div>
+<div class="review">⭐⭐⭐⭐⭐ Amazing Momos!</div>
+<div class="review">⭐⭐⭐⭐⭐ Best spicy chutney in town.</div>
+<div class="review">⭐⭐⭐⭐⭐ Fast pickup and great service.</div>
 
 </div>
-
-<footer>
-© 2026 MR's Momos
-</footer>
 
 <script>
-let cart = [];
 
-function addCart(item) {
-    cart.push(item);
-    updateCart();
-}
+const menuItems = [
+{name:"Veg Steamed Momos", price:9.99},
+{name:"Chicken Steamed Momos", price:10.99},
+{name:"Paneer Momos", price:10.99},
+{name:"Veg Fried Momos", price:10.99},
+{name:"Chicken Fried Momos", price:11.99},
+{name:"Paneer Fried Momos", price:11.99},
+{name:"Tandoori Veg Momos", price:12.99},
+{name:"Tandoori Chicken Momos", price:13.99},
+{name:"Masala Fries", price:5.99},
+{name:"Cold Drink", price:2.49}
+];
 
-function removeItem(index) {
-    cart.splice(index, 1);
-    updateCart();
-}
+const cart = [];
 
-function updateCart() {
-    let html = "";
+function loadMenu(){
 
-    cart.forEach((item, index) => {
-        html += `
-        <li>
-            ${item}
-            <button onclick="removeItem(${index})"
-                    style="margin-left:10px;background:red;width:auto;padding:5px 10px;">
-                Remove
-            </button>
-        </li>
-        `;
-    });
+let html="";
 
-    document.getElementById("cart").innerHTML = html;
-}
+menuItems.forEach((item,index)=>{
 
-function sendOrder() {
-
-    if(cart.length === 0){
-        alert("Please add at least one item.");
-        return;
-    }
-
-    let message =
-`🥟 MR's MOMOS ORDER
-
-Name:
-${document.getElementById("name").value}
-
-Phone:
-${document.getElementById("phone").value}
-
-Pickup Date:
-${document.getElementById("date").value}
-
-Pickup Time:
-${document.getElementById("time").value}
-
-Items:
-${cart.join("\n")}
-
-Notes:
-${document.getElementById("note").value}
+html += `
+<div class="card">
+<h3>${item.name}</h3>
+<p class="price">CAD $${item.price.toFixed(2)}</p>
+<button class="add-btn" onclick="addToCart(${index})">
+Add To Cart
+</button>
+</div>
 `;
 
-    let whatsapp = "18252505474";
+});
 
-    window.open(
-        "https://wa.me/" + whatsapp + "?text=" + encodeURIComponent(message),
-        "_blank"
-    );
+document.getElementById("menu").innerHTML = html;
 }
+
+function addToCart(index){
+
+const existing = cart.find(i=>i.name===menuItems[index].name);
+
+if(existing){
+existing.qty++;
+}
+else{
+cart.push({
+name:menuItems[index].name,
+price:menuItems[index].price,
+qty:1
+});
+}
+
+renderCart();
+}
+
+function increase(index){
+cart[index].qty++;
+renderCart();
+}
+
+function decrease(index){
+
+if(cart[index].qty > 1){
+cart[index].qty--;
+}
+else{
+cart.splice(index,1);
+}
+
+renderCart();
+}
+
+function removeItem(index){
+cart.splice(index,1);
+renderCart();
+}
+
+function renderCart(){
+
+let html="";
+let total=0;
+
+cart.forEach((item,index)=>{
+
+const subtotal = item.price * item.qty;
+total += subtotal;
+
+html += `
+<div class="cart-item">
+<div>
+<strong>${item.name}</strong><br>
+CAD $${item.price.toFixed(2)}
+</div>
+
+<div>
+<button class="qty-btn" onclick="decrease(${index})">-</button>
+${item.qty}
+<button class="qty-btn" onclick="increase(${index})">+</button>
+
+<button class="remove-btn"
+onclick="removeItem(${index})">
+Remove
+</button>
+</div>
+</div>
+`;
+});
+
+document.getElementById("cartItems").innerHTML = html;
+document.getElementById("total").innerText = total.toFixed(2);
+}
+
+function sendOrder(){
+
+if(cart.length===0){
+alert("Please add items to cart.");
+return;
+}
+
+let itemsText="";
+
+cart.forEach(item=>{
+itemsText += `${item.qty} x ${item.name}\n`;
+});
+
+const total=document.getElementById("total").innerText;
+
+const message =
+`🥟 MR's MOMOS ORDER
+
+Name: ${document.getElementById("name").value}
+
+Phone: ${document.getElementById("phone").value}
+
+Pickup Date: ${document.getElementById("pickupDate").value}
+
+Pickup Time: ${document.getElementById("pickupTime").value}
+
+Items:
+${itemsText}
+
+Total: CAD $${total}
+
+Notes:
+${document.getElementById("notes").value}
+`;
+
+const whatsapp = "18252505474";
+
+window.open(
+"https://wa.me/" + whatsapp + "?text=" +
+encodeURIComponent(message),
+"_blank"
+);
+
+}
+
+loadMenu();
+
 </script>
 
 </body>
