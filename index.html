@@ -459,7 +459,46 @@ margin-top:10px;
 
 }
 
+.cart-count{
 
+background:#ffb703;
+
+color:#222;
+
+padding:8px 15px;
+
+border-radius:20px;
+
+font-weight:bold;
+
+}
+
+
+/* Add to cart popup */
+
+#cartMessage{
+
+position:fixed;
+
+top:90px;
+
+right:20px;
+
+background:#25D366;
+
+color:white;
+
+padding:15px 25px;
+
+border-radius:10px;
+
+display:none;
+
+z-index:999;
+
+font-weight:bold;
+
+}
 </style>
 
 </head>
@@ -472,9 +511,11 @@ margin-top:10px;
 <header>
 
 <div class="logo">
-
 🥟 MR's Momos
+</div>
 
+<div class="cart-count">
+🛒 Cart: <span id="cartCount">0</span>
 </div>
 
 
