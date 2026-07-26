@@ -1578,61 +1578,52 @@ encodeURIComponent(message),
 function generatePickupTimes() {
 
     const pickup = document.getElementById("pickupTime");
-
     pickup.innerHTML = "";
 
     const now = new Date();
 
-    // Earliest pickup = 45 minutes from now
-    now.setMinutes(now.getMinutes() + 45);
+    // Earliest pickup = 40 minutes from now
+    now.setMinutes(now.getMinutes() + 40);
 
-    // Round to next 15-minute interval
-    const mins = now.getMinutes();
-    const rounded = Math.ceil(mins / 15) * 15;
+    // Round up to the next 5-minute interval
+    const minutes = now.getMinutes();
+    now.setMinutes(Math.ceil(minutes / 5) * 5);
 
-    now.setMinutes(rounded);
+    // Restaurant hours
+    const openHour = 12;   // 12:00 PM
+    const closeHour = 24;  // Midnight
 
-    if (rounded === 60) {
-        now.setHours(now.getHours() + 1);
-        now.setMinutes(0);
+    // If before opening, start at 12:40 PM
+    if (now.getHours() < openHour) {
+        now.setHours(openHour);
+        now.setMinutes(40);
     }
 
-  // Restaurant hours
-const openHour = 12;   // 12 PM
-const closeHour = 0;   // Midnight (12 AM)
+    // Create pickup slots every 5 minutes
+    while (true) {
 
-// If current time is before opening, start at 12:00 PM
-if (now.getHours() < openHour) {
-    now.setHours(openHour);
-    now.setMinutes(0);
-}
+        const hour = now.getHours();
+        const minute = now.getMinutes();
 
-// Generate slots until midnight
-while (!(now.getHours() === 0 && now.getMinutes() === 0)) {
+        // Stop after midnight
+        if (hour >= closeHour || (hour === 0 && minute > 0)) {
+            break;
+        }
 
-    let hour = now.getHours();
-    let minute = now.getMinutes();
+        const option = document.createElement("option");
 
-    let suffix = hour >= 12 ? "PM" : "AM";
+        const displayHour = ((hour + 11) % 12) + 1;
+        const ampm = hour >= 12 ? "PM" : "AM";
 
-    let displayHour = hour % 12;
-    if (displayHour === 0) displayHour = 12;
+        const displayMinute = minute.toString().padStart(2, "0");
 
-    let option = document.createElement("option");
-    option.value =
-        displayHour + ":" +
-        String(minute).padStart(2, "0") +
-        " " + suffix;
+        option.value = `${displayHour}:${displayMinute} ${ampm}`;
+        option.text = `🕒 ${displayHour}:${displayMinute} ${ampm}`;
 
-    option.text =
-        "🕒 " +
-        displayHour + ":" +
-        String(minute).padStart(2, "0") +
-        " " + suffix;
+        pickup.appendChild(option);
 
-    pickup.appendChild(option);
-
-    now.setMinutes(now.getMinutes() + 15);
+        now.setMinutes(now.getMinutes() + 5);
+    }
 }
 
 }
