@@ -1597,55 +1597,43 @@ function generatePickupTimes() {
         now.setMinutes(0);
     }
 
-    // Restaurant hours
-    const openHour = 11;   // 11:00 AM
-    const closeHour = 22;  // 10:00 PM
+  // Restaurant hours
+const openHour = 12;   // 12 PM
+const closeHour = 0;   // Midnight (12 AM)
 
-    // If before opening
-    if (now.getHours() < openHour) {
-        now.setHours(openHour);
-        now.setMinutes(0);
-    }
+// If current time is before opening, start at 12:00 PM
+if (now.getHours() < openHour) {
+    now.setHours(openHour);
+    now.setMinutes(0);
+}
 
-    // Generate pickup slots every 15 minutes
-    while (
-        now.getHours() < closeHour ||
-        (now.getHours() === closeHour && now.getMinutes() === 0)
-    ) {
+// Generate slots until midnight
+while (!(now.getHours() === 0 && now.getMinutes() === 0)) {
 
-        let hour = now.getHours();
-        let minute = now.getMinutes();
+    let hour = now.getHours();
+    let minute = now.getMinutes();
 
-        let suffix = hour >= 12 ? "PM" : "AM";
+    let suffix = hour >= 12 ? "PM" : "AM";
 
-        let displayHour = hour % 12;
+    let displayHour = hour % 12;
+    if (displayHour === 0) displayHour = 12;
 
-        if (displayHour === 0)
-            displayHour = 12;
+    let option = document.createElement("option");
+    option.value =
+        displayHour + ":" +
+        String(minute).padStart(2, "0") +
+        " " + suffix;
 
-        let displayMinute = minute.toString().padStart(2, "0");
+    option.text =
+        "🕒 " +
+        displayHour + ":" +
+        String(minute).padStart(2, "0") +
+        " " + suffix;
 
-        let option = document.createElement("option");
+    pickup.appendChild(option);
 
-        option.value =
-            displayHour +
-            ":" +
-            displayMinute +
-            " " +
-            suffix;
-
-        option.text =
-            "🕒 " +
-            displayHour +
-            ":" +
-            displayMinute +
-            " " +
-            suffix;
-
-        pickup.appendChild(option);
-
-        now.setMinutes(now.getMinutes() + 15);
-    }
+    now.setMinutes(now.getMinutes() + 15);
+}
 
 }
 
