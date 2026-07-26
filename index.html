@@ -1574,58 +1574,62 @@ encodeURIComponent(message),
 
 }
 
-// Generate pickup time slots
 function generatePickupTimes() {
 
     const pickup = document.getElementById("pickupTime");
+
+    if (!pickup) return;
+
     pickup.innerHTML = "";
 
-    const now = new Date();
 
-    // Minimum preparation time = 40 minutes
-    now.setMinutes(now.getMinutes() + 40);
+    let now = new Date();
 
 
-    // Round to next 5 minutes
-    now.setMinutes(Math.ceil(now.getMinutes() / 5) * 5);
+    // Customer minimum wait time = 30 minutes
+    now.setMinutes(now.getMinutes() + 30);
 
 
 
-    // Restaurant hours
-    const openingHour = 12; // 12 PM
-    const lastPickupHour = 0; // 12 AM
-    const lastPickupMinute = 15; // 12:15 AM
+    // Make pickup slots every 15 minutes
+    now.setMinutes(Math.ceil(now.getMinutes() / 15) * 15);
 
 
 
-    // Convert closing time (12:15 AM next day)
-    let closingTime = new Date();
+    // Restaurant opens 12 PM
+    let openTime = new Date();
 
-    closingTime.setHours(24);
-    closingTime.setMinutes(15);
-
+    openTime.setHours(12,0,0,0);
 
 
-    // Before opening time
-    let currentHour = now.getHours();
 
-    if(currentHour < openingHour){
+    // Restaurant last pickup 12:15 AM
+    let closeTime = new Date();
 
-        now.setHours(openingHour);
-        now.setMinutes(0);
+    closeTime.setDate(closeTime.getDate()+1);
+    closeTime.setHours(0,15,0,0);
+
+
+
+    // Before opening
+    if(now < openTime){
+
+        now = openTime;
 
     }
 
 
 
-    // Create pickup options every 15 minutes
-
-    while(now <= closingTime){
+    while(now <= closeTime){
 
 
         let hour = now.getHours();
 
         let minute = now.getMinutes();
+
+
+
+        let ampm = hour >= 12 ? "PM" : "AM";
 
 
         let displayHour = hour % 12;
@@ -1635,25 +1639,21 @@ function generatePickupTimes() {
         }
 
 
-        let ampm = hour >= 12 ? "PM" : "AM";
 
-
-        let timeText =
-        displayHour +
-        ":" +
+        let time =
+        displayHour + ":" +
         String(minute).padStart(2,"0") +
-        " " +
-        ampm;
+        " " + ampm;
 
 
 
         let option = document.createElement("option");
 
-
-        option.value = timeText;
+        option.value = time;
 
         option.text =
-        "🕒 " + timeText;
+        "🕒 " + time;
+
 
 
         pickup.appendChild(option);
@@ -1665,7 +1665,6 @@ function generatePickupTimes() {
 
     }
 
-}
 }
 
 </script>
