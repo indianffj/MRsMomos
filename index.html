@@ -949,8 +949,7 @@ id="pickupDate">
 Pickup Time
 </label>
 
-<input type="time"
-id="pickupTime">
+<select id="pickupTime"></select>
 
 
 
@@ -1575,8 +1574,82 @@ encodeURIComponent(message),
 
 }
 
+// Generate pickup time slots
+function generatePickupTimes() {
 
+    const pickup = document.getElementById("pickupTime");
 
+    pickup.innerHTML = "";
+
+    const now = new Date();
+
+    // Earliest pickup = 45 minutes from now
+    now.setMinutes(now.getMinutes() + 45);
+
+    // Round to next 15-minute interval
+    const mins = now.getMinutes();
+    const rounded = Math.ceil(mins / 15) * 15;
+
+    now.setMinutes(rounded);
+
+    if (rounded === 60) {
+        now.setHours(now.getHours() + 1);
+        now.setMinutes(0);
+    }
+
+    // Restaurant hours
+    const openHour = 11;   // 11:00 AM
+    const closeHour = 22;  // 10:00 PM
+
+    // If before opening
+    if (now.getHours() < openHour) {
+        now.setHours(openHour);
+        now.setMinutes(0);
+    }
+
+    // Generate pickup slots every 15 minutes
+    while (
+        now.getHours() < closeHour ||
+        (now.getHours() === closeHour && now.getMinutes() === 0)
+    ) {
+
+        let hour = now.getHours();
+        let minute = now.getMinutes();
+
+        let suffix = hour >= 12 ? "PM" : "AM";
+
+        let displayHour = hour % 12;
+
+        if (displayHour === 0)
+            displayHour = 12;
+
+        let displayMinute = minute.toString().padStart(2, "0");
+
+        let option = document.createElement("option");
+
+        option.value =
+            displayHour +
+            ":" +
+            displayMinute +
+            " " +
+            suffix;
+
+        option.text =
+            "🕒 " +
+            displayHour +
+            ":" +
+            displayMinute +
+            " " +
+            suffix;
+
+        pickup.appendChild(option);
+
+        now.setMinutes(now.getMinutes() + 15);
+    }
+
+}
+
+    generatePickupTimes();
 </script>
 
 
