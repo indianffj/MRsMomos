@@ -1868,24 +1868,19 @@ const result =
 await response.json();
 
 
-if(
-!response.ok ||
-!result.payment_url
-){
+if (!response.ok || !result.payment_url) {
 
-console.error(result);
+    console.error("SQUARE WORKER RESPONSE:", result);
 
-alert(
-"Unable to create payment. Please try again."
-);
+    alert(
+        "Square Error:\n\n" +
+        JSON.stringify(result, null, 2)
+    );
 
-button.disabled = false;
+    button.disabled = false;
+    button.innerText = "💳 Pay Online";
 
-button.innerText =
-"💳 Pay Online";
-
-return;
-
+    return;
 }
 
 
