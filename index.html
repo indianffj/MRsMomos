@@ -7,16 +7,35 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title></title>
-
+<title>MR's Momos | Fresh Hot Delicious Momos</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 
 <style>
 
-  .marquee{
+/* =========================
+   BASIC
+========================= */
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#fff8f0;
+color:#333;
+}
+
+
+/* =========================
+   TOP MARQUEE
+========================= */
+
+.marquee{
 background:#ffb703;
 color:#222;
 padding:12px 0;
@@ -24,15 +43,12 @@ overflow:hidden;
 white-space:nowrap;
 font-weight:600;
 font-size:16px;
-
 }
 
 .marquee-content{
-
 display:inline-block;
 padding-left:100%;
 animation:scrollText 20s linear infinite;
-
 }
 
 @keyframes scrollText{
@@ -45,27 +61,12 @@ transform:translateX(0);
 transform:translateX(-100%);
 }
 
-}  
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
 }
 
 
-body{
-
-font-family:'Poppins',sans-serif;
-
-background:#fff8f0;
-
-color:#333;
-
-}
-
-
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 header{
 
@@ -89,17 +90,15 @@ z-index:999;
 
 }
 
-
 .logo{
-    display:flex;
-    align-items:center;
+display:flex;
+align-items:center;
 }
 
 .logo img{
-    height:70px;
-    width:auto;
+height:70px;
+width:auto;
 }
-
 
 .cart-count{
 
@@ -117,7 +116,6 @@ cursor:pointer;
 
 }
 
-
 nav a{
 
 color:white;
@@ -131,8 +129,9 @@ font-size:14px;
 }
 
 
-
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
 
@@ -163,22 +162,14 @@ color:white;
 
 }
 
-
 .hero h1{
-
 font-size:60px;
-
 }
-
 
 .hero p{
-
 font-size:22px;
-
 margin-top:10px;
-
 }
-
 
 .order-btn{
 
@@ -201,8 +192,9 @@ text-decoration:none;
 }
 
 
-
-/* CONTAINER */
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
 
@@ -215,8 +207,6 @@ margin:auto;
 padding:40px 0;
 
 }
-
-
 
 .title{
 
@@ -231,8 +221,9 @@ margin-bottom:30px;
 }
 
 
-
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
 .menu-grid{
 
@@ -246,27 +237,31 @@ gap:25px;
 
 }
 
-
-
 .card{
-    background:white;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
-    transition:.3s;
 
-    display:flex;
-    flex-direction:column;
-    height:100%;
+background:white;
+
+border-radius:18px;
+
+overflow:hidden;
+
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+
+transition:.3s;
+
+display:flex;
+
+flex-direction:column;
+
+height:100%;
+
 }
-
 
 .card:hover{
 
 transform:translateY(-8px);
 
 }
-
 
 .card img{
 
@@ -276,34 +271,58 @@ height:220px;
 
 object-fit:cover;
 
+object-position:center;
 
 }
 
-
 .card-content{
-    padding:20px;
 
-    display:flex;
-    flex-direction:column;
-    flex:1;
+padding:20px;
+
+display:flex;
+
+flex-direction:column;
+
+flex:1;
+
 }
 
 .card h3{
-    font-size:20px;
-    min-height:52px;
+
+font-size:20px;
+
+min-height:52px;
+
 }
 
+.pieces{
+
+min-height:24px;
+
+font-size:14px;
+
+}
+
+.description{
+
+font-size:14px;
+
+min-height:24px;
+
+}
 
 .price{
-    color:#c1121f;
-    font-size:20px;
-    font-weight:bold;
 
-    margin-top:auto;
-    margin-bottom:10px;
-}
-.pieces{
-    min-height:24px;
+color:#c1121f;
+
+font-size:20px;
+
+font-weight:bold;
+
+margin-top:auto;
+
+margin-bottom:10px;
+
 }
 
 .add-btn{
@@ -326,7 +345,6 @@ font-size:16px;
 
 }
 
-
 .add-btn:hover{
 
 background:#8d0801;
@@ -334,8 +352,9 @@ background:#8d0801;
 }
 
 
-
-/* CART MESSAGE */
+/* =========================
+   CART MESSAGE
+========================= */
 
 #cartMessage{
 
@@ -359,11 +378,14 @@ z-index:9999;
 
 font-weight:bold;
 
+box-shadow:0 4px 15px rgba(0,0,0,.2);
+
 }
 
 
-
-/* ORDER BOX */
+/* =========================
+   ORDER BOX
+========================= */
 
 .order-box{
 
@@ -376,8 +398,6 @@ border-radius:20px;
 box-shadow:0 5px 20px rgba(0,0,0,.1);
 
 }
-
-
 
 input,
 textarea,
@@ -393,8 +413,11 @@ border-radius:8px;
 
 border:1px solid #ddd;
 
-}
+font-family:'Poppins',sans-serif;
 
+font-size:15px;
+
+}
 
 button{
 
@@ -403,8 +426,9 @@ font-family:'Poppins',sans-serif;
 }
 
 
-
-/* CART ITEM */
+/* =========================
+   CART ITEMS
+========================= */
 
 .cart-item{
 
@@ -418,7 +442,6 @@ border-radius:10px;
 
 }
 
-
 .qty-btn{
 
 padding:5px 12px;
@@ -427,9 +450,13 @@ margin:5px;
 
 cursor:pointer;
 
+border:1px solid #ddd;
+
+border-radius:5px;
+
+background:white;
+
 }
-
-
 
 .remove-btn{
 
@@ -443,11 +470,69 @@ padding:6px 10px;
 
 border-radius:5px;
 
+cursor:pointer;
+
 }
 
 
+/* =========================
+   SQUARE PAYMENT
+========================= */
 
-/* GOOGLE REVIEW */
+.square-pay-btn{
+
+width:100%;
+
+background:#111;
+
+color:white;
+
+border:none;
+
+padding:14px;
+
+border-radius:10px;
+
+font-size:17px;
+
+font-weight:600;
+
+cursor:pointer;
+
+margin-top:5px;
+
+}
+
+.square-pay-btn:hover{
+
+opacity:.9;
+
+}
+
+.square-pay-btn:disabled{
+
+opacity:.6;
+
+cursor:not-allowed;
+
+}
+
+.payment-note{
+
+text-align:center;
+
+font-size:13px;
+
+color:#777;
+
+margin-top:8px;
+
+}
+
+
+/* =========================
+   GOOGLE REVIEW
+========================= */
 
 .google-review{
 
@@ -462,7 +547,6 @@ text-align:center;
 box-shadow:0 5px 20px rgba(0,0,0,.1);
 
 }
-
 
 .google-btn{
 
@@ -483,8 +567,9 @@ cursor:pointer;
 }
 
 
-
-/* WHATSAPP */
+/* =========================
+   WHATSAPP
+========================= */
 
 .whatsapp{
 
@@ -506,9 +591,16 @@ cursor:pointer;
 
 }
 
+.whatsapp:hover{
+
+background:#1ebe5d;
+
+}
 
 
-/* FLOATING BUTTON */
+/* =========================
+   FLOATING WHATSAPP
+========================= */
 
 .whatsapp-float{
 
@@ -538,32 +630,16 @@ font-size:30px;
 
 text-decoration:none;
 
-}
+z-index:999;
 
-
-
-footer{
-
-background:#222;
-
-color:white;
-
-text-align:center;
-
-padding:25px;
+box-shadow:0 4px 15px rgba(0,0,0,.2);
 
 }
 
-.location-card{
 
-background:#ffffff;
-padding:30px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 5px 20px rgba(0,0,0,.1);
-margin:30px 0;
-
-}
+/* =========================
+   PICKUP LOCATION
+========================= */
 
 .location-small{
 
@@ -581,17 +657,15 @@ margin:20px 0;
 
 }
 
-
 .location-small h3{
 
 color:#c1121f;
 
 font-size:20px;
 
-margin-bottom:10px;
+margin-bottom:8px;
 
 }
-
 
 .location-small h3 span{
 
@@ -603,8 +677,7 @@ font-size:17px;
 
 }
 
-
-.map-btn{
+.location-small .map-btn{
 
 display:inline-block;
 
@@ -622,10 +695,9 @@ font-weight:600;
 
 font-size:14px;
 
-margin-bottom:8px;
+margin-top:2px;
 
 }
-
 
 .location-small p{
 
@@ -637,9 +709,27 @@ font-size:13px;
 
 }
 
-/* Mobile Design */
 
-@media(max-width:700px){
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+background:#222;
+
+color:white;
+
+text-align:center;
+
+padding:25px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
@@ -651,13 +741,23 @@ gap:10px;
 
 }
 
+.logo img{
 
-.hero h1{
-
-font-size:40px;
+height:60px;
 
 }
 
+nav{
+
+margin-top:5px;
+
+}
+
+nav a{
+
+margin:0 7px;
+
+}
 
 .hero{
 
@@ -665,8 +765,82 @@ height:400px;
 
 }
 
+.hero h1{
+
+font-size:40px;
+
 }
 
+.hero p{
+
+font-size:17px;
+
+}
+
+.container{
+
+width:94%;
+
+}
+
+.title{
+
+font-size:28px;
+
+}
+
+.card img{
+
+height:210px;
+
+}
+
+.order-box{
+
+padding:20px;
+
+}
+
+.location-small h3{
+
+font-size:17px;
+
+}
+
+.location-small h3 span{
+
+font-size:15px;
+
+}
+
+.marquee{
+
+font-size:14px;
+
+}
+
+}
+
+
+/* VERY SMALL PHONES */
+
+@media(max-width:400px){
+
+.card img{
+
+height:190px;
+
+}
+
+.cart-count{
+
+font-size:14px;
+
+padding:7px 13px;
+
+}
+
+}
 
 </style>
 
@@ -676,23 +850,38 @@ height:400px;
 <body>
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
+
 <div class="marquee">
-    <div class="marquee-content">
 
-🥟 Freshly made after you order • Never Frozen • Please allow 30 minute for pickup • Thank you for choosing MR's Momos ❤️
+<div class="marquee-content">
 
-    </div>
+🥟 Freshly made after you order • Never Frozen • Please allow 30 minutes for pickup • Thank you for choosing MR's Momos ❤️
+
+</div>
+
 </div>
 
 
 <div class="logo">
-    <img src="images/Image_20260723_103058_185.webp" alt="MR's Momos Logo">
+
+<img
+src="images/Image_20260723_103058_185.webp"
+alt="MR's Momos Logo">
+
 </div>
 
-<div class="cart-count" onclick="scrollToCart()">
 
-🛒 Cart: <span id="cartCount">0</span>
+<div
+class="cart-count"
+onclick="scrollToCart()">
+
+🛒 Cart:
+<span id="cartCount">0</span>
 
 </div>
 
@@ -703,11 +892,9 @@ height:400px;
 Menu
 </a>
 
-
 <a href="#order">
 Order
 </a>
-
 
 <a href="#reviews">
 Reviews
@@ -715,10 +902,10 @@ Reviews
 
 </nav>
 
-
 </header>
 
 
+<!-- CART POPUP -->
 
 <div id="cartMessage">
 
@@ -727,123 +914,152 @@ Item Added
 </div>
 
 
-
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-
 <div>
 
-
-<h1>
-
-</h1>
-
-
-<p>
-
-</p>
-
-
-<p>
-
-</p>
-
-
-<a href="#menu" class="order-btn">
+<a
+href="#menu"
+class="order-btn">
 
 Order Now
 
 </a>
 
-
 </div>
-
 
 </section>
 
-<!-- Pickup Location -->
+
+<!-- =========================
+     PICKUP LOCATION
+========================= -->
 
 <section class="container">
 
 <div class="location-small">
 
 <h3>
-📍 Pickup Location 
-<span>• Hamilton Mountain, Ontario</span>
+
+📍 Pickup Location
+
+<span>
+• Hamilton Mountain, Ontario
+</span>
+
 </h3>
 
-<a href="https://www.google.com/maps/place/Mrs.Momos/@43.2300614,-79.872642,819m/data=!3m1!1e3!4m6!3m5!1s0x882c9b72bbe59c11:0x56f0cc03378ff0!8m2!3d43.2333136!4d-79.8714744!16s%2Fg%2F11zd3sqrzk?entry=ttu"
-target="_blank" class="order-btn">
+
+<a
+
+href="https://www.google.com/maps/place/Mrs.Momos/@43.2300614,-79.872642,819m/data=!3m1!1e3!4m6!3m5!1s0x882c9b72bbe59c11:0x56f0cc03378ff0!8m2!3d43.2333136!4d-79.8714744!16s%2Fg%2F11zd3sqrzk?entry=ttu"
+
+target="_blank"
+
+class="map-btn">
+
 📍 View on Google Maps
+
 </a>
 
+
 <p>
+
 📲 Exact pickup details will be shared with you on WhatsApp after your order is placed.
+
 </p>
 
 </div>
 
 </section>
 
-<section class="container" id="menu">
+
+<!-- =========================
+     MENU
+========================= -->
+
+<section
+class="container"
+id="menu">
 
 
 <h2 class="title">
-Our Menu
-</h2>
 
+Our Menu
+
+</h2>
 
 
 <div class="menu-grid">
 
 
-<!-- MENU ITEMS START -->
+<!-- 1 -->
 
 <div class="card">
 
-<img src="images/Image_20260722_140401_820.webp">
+<img
+src="images/Image_20260722_140401_820.webp"
+alt="Mrs Momos Special">
 
 <div class="card-content">
 
 <h3>
 Mrs Momos Special
 </h3>
+
 <p class="pieces">
 🥟 10 Pieces
 </p>
-    
+
 <p class="price">
 $15.00 CAD
 </p>
 
-<button class="add-btn" onclick="addToCart('Mrs Momos Special',15.00)">
+<button
+class="add-btn"
+onclick="addToCart('Mrs Momos Special',15.00)">
+
 Add To Cart
+
 </button>
 
 </div>
 
 </div>
 
+
+<!-- 2 -->
+
 <div class="card">
 
-<img src="images/Image_20260730_152029_428.webp">
+<img
+src="images/Image_20260730_152029_428.webp"
+alt="Schezwan Momo">
 
 <div class="card-content">
 
 <h3>
 Schezwan Momo
 </h3>
+
 <p class="pieces">
 🥟 10 Pieces
 </p>
-    
+
 <p class="price">
 $15.00 CAD
 </p>
 
-<button class="add-btn" onclick="addToCart('Schezwan Momo',15.00)">
+<button
+class="add-btn"
+onclick="addToCart('Schezwan Momo',15.00)">
+
 Add To Cart
+
 </button>
 
 </div>
@@ -851,24 +1067,34 @@ Add To Cart
 </div>
 
 
+<!-- 3 -->
+
 <div class="card">
 
-<img src="images/Image_20260722_140402_356.webp">
+<img
+src="images/Image_20260722_140402_356.webp"
+alt="Veg Steamed Paneer Momos">
 
 <div class="card-content">
 
 <h3>
 Veg Steamed Paneer Momos
 </h3>
+
 <p class="pieces">
 🥟 12 Pieces
 </p>
+
 <p class="price">
 $12.00 CAD
 </p>
 
-<button class="add-btn" onclick="addToCart('Veg Steamed Momos',12.00)">
+<button
+class="add-btn"
+onclick="addToCart('Veg Steamed Paneer Momos',12.00)">
+
 Add To Cart
+
 </button>
 
 </div>
@@ -876,76 +1102,104 @@ Add To Cart
 </div>
 
 
+<!-- 4 -->
 
 <div class="card">
 
-<img src="images/Image_20260726_112833_852.webp">
+<img
+src="images/Image_20260726_112833_852.webp"
+alt="Chilli Cheese Corn Momo">
 
 <div class="card-content">
 
 <h3>
 Chilli Cheese Corn Momo
 </h3>
+
 <p class="pieces">
 🥟 10 Pieces
 </p>
+
 <p class="price">
 $12.00 CAD
 </p>
 
-<button class="add-btn" onclick="addToCart('Chilli Cheese Corn Momo',12.00)">
+<button
+class="add-btn"
+onclick="addToCart('Chilli Cheese Corn Momo',12.00)">
+
 Add To Cart
+
 </button>
 
 </div>
 
 </div>
 
-<!-- MENU ITEMS CONTINUE -->
 
+<!-- 5 -->
 
 <div class="card">
 
-<img src="images/Image_20260722_140401_990.webp">
+<img
+src="images/Image_20260722_140401_990.webp"
+alt="Fried Momo">
 
 <div class="card-content">
 
 <h3>
 Fried Momo
 </h3>
+
 <p class="pieces">
 🥟 10 Pieces
-
-<p class="price">
-$12.00 Cad
 </p>
 
-<button class="add-btn" onclick="addToCart('Veg Fried Momos',12.00)">
+<p class="price">
+$12.00 CAD
+</p>
+
+<button
+class="add-btn"
+onclick="addToCart('Veg Fried Momos',12.00)">
+
 Add To Cart
+
 </button>
 
 </div>
 
 </div>
 
+
+<!-- 6 -->
+
 <div class="card">
 
-<img src="images/Image_20260728_161122_941.webp">
+<img
+src="images/Image_20260728_161122_941.webp"
+alt="Half and Half Momos">
 
 <div class="card-content">
 
 <h3>
 Mrs Momos Half & Half Special
 </h3>
+
 <p class="pieces">
 🥟 10 Pieces (Half Chilli Cheese + Half Veg Paneer)
 </p>
+
 <p class="price">
 $12.00 CAD
 </p>
 
-<button class="add-btn" onclick="addToCart('Half & Half Momos Plate',12.00)">
+<button
+class="add-btn"
+onclick="addToCart('Half & Half Momos Plate',12.00)">
+
 Add To Cart
+
 </button>
 
 </div>
@@ -953,25 +1207,34 @@ Add To Cart
 </div>
 
 
+<!-- 7 -->
+
 <div class="card">
 
-<img src="images/Image_20260728_164647_336.webp">
+<img
+src="images/Image_20260728_164647_336.webp"
+alt="Mrs Momos 3 Item Platter">
 
 <div class="card-content">
 
 <h3>
 Mrs Momos 3 Item Platter
 </h3>
+
 <p class="description">
 🥟 15 Pieces (Veg Momos + Chilli Cheese Corn Momos + Fried Momos)
 </p>
-  
+
 <p class="price">
 $17.99 CAD
 </p>
 
-<button class="add-btn" onclick="addToCart('MRs Momos 3 Item Platter',17.99)">
+<button
+class="add-btn"
+onclick="addToCart('MRs Momos 3 Item Platter',17.99)">
+
 Add To Cart
+
 </button>
 
 </div>
@@ -979,25 +1242,34 @@ Add To Cart
 </div>
 
 
+<!-- 8 -->
 
 <div class="card">
 
-<img src="images/Image_20260722_140402_012.webp">
+<img
+src="images/Image_20260722_140402_012.webp"
+alt="Chinese Samosa">
 
 <div class="card-content">
 
 <h3>
 Chinese Samosa
 </h3>
+
 <p class="pieces">
 🥟 8 Pieces
 </p>
+
 <p class="price">
 $10.00 CAD
 </p>
 
-<button class="add-btn" onclick="addToCart('Chinese Samosa',10.00)">
+<button
+class="add-btn"
+onclick="addToCart('Chinese Samosa',10.00)">
+
 Add To Cart
+
 </button>
 
 </div>
@@ -1005,10 +1277,13 @@ Add To Cart
 </div>
 
 
+<!-- 9 -->
 
 <div class="card">
 
-<img src="images/Image_20260722_140401_681.webp">
+<img
+src="images/Image_20260722_140401_681.webp"
+alt="Noodles">
 
 <div class="card-content">
 
@@ -1020,8 +1295,12 @@ Noodles
 $12.00 CAD
 </p>
 
-<button class="add-btn" onclick="addToCart('Noodles',12.00)">
+<button
+class="add-btn"
+onclick="addToCart('Noodles',12.00)">
+
 Add To Cart
+
 </button>
 
 </div>
@@ -1029,11 +1308,13 @@ Add To Cart
 </div>
 
 
-
+<!-- 10 -->
 
 <div class="card">
 
-<img src="images/calories_Momos_Chutney.jpg">
+<img
+src="images/calories_Momos_Chutney.jpg"
+alt="Spicy Chutney">
 
 <div class="card-content">
 
@@ -1042,11 +1323,15 @@ Spicy Chutney
 </h3>
 
 <p class="price">
-$1.00
+$1.00 CAD
 </p>
 
-<button class="add-btn" onclick="addToCart('Spicy Sauce',1.00)">
+<button
+class="add-btn"
+onclick="addToCart('Spicy Sauce',1.00)">
+
 Add To Cart
+
 </button>
 
 </div>
@@ -1059,22 +1344,23 @@ Add To Cart
 </section>
 
 
+<!-- =========================
+     ORDER
+========================= -->
 
-
-
-<!-- ORDER SECTION -->
-
-
-<section class="container" id="order">
+<section
+class="container"
+id="order">
 
 
 <div class="order-box">
 
 
 <h2 class="title">
-Your Cart & Order
-</h2>
 
+Your Cart & Order
+
+</h2>
 
 
 <div id="cartItems">
@@ -1082,7 +1368,6 @@ Your Cart & Order
 Your cart is empty
 
 </div>
-
 
 
 <h3>
@@ -1093,7 +1378,6 @@ $<span id="total">0.00</span> CAD
 </h3>
 
 
-
 <br>
 
 
@@ -1101,27 +1385,27 @@ $<span id="total">0.00</span> CAD
 Customer Name
 </label>
 
-<input id="customerName"
+<input
+id="customerName"
 placeholder="Your name">
-
 
 
 <label>
 Phone Number
 </label>
 
-<input id="phone"
+<input
+id="phone"
 placeholder="Phone number">
-
 
 
 <label>
 Pickup Date
 </label>
 
-<input type="date"
+<input
+type="date"
 id="pickupDate">
-
 
 
 <label>
@@ -1131,62 +1415,65 @@ Pickup Time
 <select id="pickupTime"></select>
 
 
-
 <label>
 Payment Method
 </label>
 
-<select id="payment" onchange="handlePaymentChange()">
+<select
+id="payment"
+onchange="handlePaymentChange()">
 
-    <option value="pickup">
-        Pay at Pickup
-    </option>
+<option value="pickup">
+Pay at Pickup
+</option>
 
-    <option value="etransfer">
-        Interac e-Transfer
-    </option>
+<option value="etransfer">
+Interac e-Transfer
+</option>
 
-    <option value="card">
-        💳 Pay Online by Card
-    </option>
+<option value="card">
+💳 Pay Online by Card
+</option>
 
 </select>
 
 
-<!-- Square Online Payment -->
+<!-- SQUARE -->
 
-<div id="squarePaymentBox" style="display:none;">
+<div
+id="squarePaymentBox"
+style="display:none;">
 
-    <button
-        type="button"
-        id="squarePayBtn"
-        class="square-pay-btn"
-        onclick="payWithSquare()">
+<button
+type="button"
+id="squarePayBtn"
+class="square-pay-btn"
+onclick="payWithSquare()">
 
-        💳 Pay Online
+💳 Pay Online
 
-    </button>
+</button>
 
-    <p class="payment-note">
-        Secure payment powered by Square
-    </p>
+<p class="payment-note">
+
+Secure payment powered by Square
+
+</p>
 
 </div>
-
 
 
 <label>
 Special Instructions
 </label>
 
-
-<textarea id="notes"
-placeholder="Notes"></textarea>
-
-
+<textarea
+id="notes"
+placeholder="Extra spicy, extra chutney, etc."></textarea>
 
 
-<button class="whatsapp"
+<button
+class="whatsapp"
 onclick="sendWhatsApp()">
 
 💬 Place Order On WhatsApp
@@ -1194,21 +1481,18 @@ onclick="sendWhatsApp()">
 </button>
 
 
-
 </div>
-
 
 </section>
 
 
+<!-- =========================
+     REVIEWS
+========================= -->
 
-
-
-
-<!-- REVIEWS -->
-
-
-<section class="container" id="reviews">
+<section
+class="container"
+id="reviews">
 
 
 <h2 class="title">
@@ -1218,24 +1502,20 @@ Customer Reviews
 </h2>
 
 
-
 <div class="google-review">
-
 
 <h2>
 ⭐ Love Our Momos?
 </h2>
 
-
 <p>
 Help MR's Momos grow by leaving a Google Review
 </p>
 
-
 <br>
 
-
-<button class="google-btn"
+<button
+class="google-btn"
 onclick="window.open(
 'https://g.page/r/CfCPNwPM8FYAEBM/review',
 '_blank'
@@ -1245,29 +1525,21 @@ onclick="window.open(
 
 </button>
 
-
 </div>
-
 
 </section>
 
 
+<!-- FLOATING WHATSAPP -->
 
-
-
-
-<a class="whatsapp-float"
-
+<a
+class="whatsapp-float"
 href="https://wa.me/18252505474"
-
 target="_blank">
 
 💬
 
 </a>
-
-
-
 
 
 <footer>
@@ -1280,298 +1552,242 @@ Fresh • Hot • Delicious
 
 </footer>
 
+
 <script>
 
+
+/* =========================
+   CART
+========================= */
 
 let cart = [];
 
 
-
-// ADD TO CART
+/* =========================
+   ADD TO CART
+========================= */
 
 function addToCart(name, price){
-
 
 let item = cart.find(
 x => x.name === name
 );
 
-
-
 if(item){
 
 item.qty++;
 
-}
-
-else{
-
+}else{
 
 cart.push({
 
 name:name,
 
-price:price,
+price:Number(price),
 
 qty:1
 
 });
 
-
 }
-
-
-
-// update cart number
 
 updateCartCount();
 
-
-// show popup
-
 showMessage(name);
 
-
-// update cart display
-
 updateCart();
-
 
 }
 
 
-
-
-
-// CART NUMBER
+/* =========================
+   CART COUNT
+========================= */
 
 function updateCartCount(){
 
-
 let count = cart.reduce(
 
-(total,item)=> total + item.qty,
+(total,item) => total + item.qty,
 
 0
 
 );
 
-
-
-document.getElementById("cartCount").innerHTML = count;
-
+document.getElementById("cartCount").innerText =
+count;
 
 }
 
 
-
-
-
-// POPUP MESSAGE
+/* =========================
+   POPUP
+========================= */
 
 function showMessage(item){
 
+let box =
+document.getElementById("cartMessage");
 
-let box = document.getElementById("cartMessage");
+box.innerText =
+"✅ " + item + " added to cart";
 
-
-box.innerHTML = "✅ " + item + " added to cart";
-
-
-box.style.display="block";
-
-
+box.style.display = "block";
 
 setTimeout(function(){
 
-
-box.style.display="none";
-
+box.style.display = "none";
 
 },2000);
-
-
 
 }
 
 
-
-
-
-// DISPLAY CART
+/* =========================
+   DISPLAY CART
+========================= */
 
 function updateCart(){
 
+let cartBox =
+document.getElementById("cartItems");
 
-let cartBox = document.getElementById("cartItems");
-
-
-let totalBox = document.getElementById("total");
-
+let totalBox =
+document.getElementById("total");
 
 
 if(cart.length === 0){
 
-
 cartBox.innerHTML =
 "Your cart is empty";
 
-
-totalBox.innerHTML =
+totalBox.innerText =
 "0.00";
 
-
 return;
-
 
 }
 
 
+let html = "";
 
-let html="";
-
-let total=0;
-
-
+let total = 0;
 
 
 cart.forEach(function(item,index){
 
-
-
 let itemTotal =
 item.price * item.qty;
-
 
 total += itemTotal;
 
 
-
 html += `
-
 
 <div class="cart-item">
 
-
 <b>${item.name}</b>
-
 
 <br>
 
-
-$${item.price.toFixed(2)} CAD
-
-
+$${item.price.toFixed(2)} CAD each
 
 <br><br>
 
-
-
-<button class="qty-btn"
+<button
+class="qty-btn"
 onclick="changeQty(${index},-1)">
--
+
+−
+
 </button>
 
-
-
+<strong>
 ${item.qty}
+</strong>
 
-
-
-<button class="qty-btn"
+<button
+class="qty-btn"
 onclick="changeQty(${index},1)">
+
 +
+
 </button>
 
-
-
-<button class="remove-btn"
+<button
+class="remove-btn"
 onclick="removeItem(${index})">
 
 Remove
 
 </button>
 
+<br><br>
 
+Subtotal:
+<strong>
+$${itemTotal.toFixed(2)} CAD
+</strong>
 
 </div>
 
-
 `;
-
-
 
 });
 
 
+cartBox.innerHTML =
+html;
 
-cartBox.innerHTML = html;
-
-
-
-totalBox.innerHTML =
+totalBox.innerText =
 total.toFixed(2);
-
-
 
 }
 
 
-
-
-
-// CHANGE QUANTITY
+/* =========================
+   CHANGE QUANTITY
+========================= */
 
 function changeQty(index,value){
 
+if(!cart[index]) return;
 
 cart[index].qty += value;
 
-
-
-if(cart[index].qty <=0){
-
+if(cart[index].qty <= 0){
 
 cart.splice(index,1);
 
-
 }
-
-
 
 updateCartCount();
 
 updateCart();
 
-
 }
 
 
-
-
-// REMOVE ITEM
+/* =========================
+   REMOVE
+========================= */
 
 function removeItem(index){
 
-
 cart.splice(index,1);
-
 
 updateCartCount();
 
 updateCart();
 
-
 }
 
 
-
-
-
-// SCROLL TO CART
+/* =========================
+   SCROLL TO CART
+========================= */
 
 function scrollToCart(){
-
 
 document
 .getElementById("order")
@@ -1581,426 +1797,517 @@ behavior:"smooth"
 
 });
 
-
 }
 
 
+/* =========================
+   SQUARE PAYMENT
+========================= */
 
-async function payWithSquare() {
+async function payWithSquare(){
 
-    if (cart.length === 0) {
-        alert("Please add items to your cart first.");
-        return;
-    }
+if(cart.length === 0){
 
-    const button = document.getElementById("squarePayBtn");
-
-    button.disabled = true;
-    button.innerText = "Creating secure payment...";
-
-    try {
-
-        const response = await fetch(
-            "https://mrs-momos-payment.jinesh-patel2376.workers.dev/",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    items: cart.map(item => ({
-                        name: item.name,
-                        price: item.price,
-                        qty: item.qty
-                    }))
-                })
-            }
-        );
-
-        const result = await response.json();
-
-        if (!response.ok || !result.payment_url) {
-
-            console.error(result);
-
-            alert(
-                "Unable to create payment. Please try again or choose another payment method."
-            );
-
-            button.disabled = false;
-            button.innerText = "💳 Pay Online";
-
-            return;
-        }
-
-        // Open Square's secure checkout
-        window.location.href = result.payment_url;
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Payment connection failed. Please try again."
-        );
-
-        button.disabled = false;
-        button.innerText = "💳 Pay Online";
-    }
-}
-
-
-// WHATSAPP ORDER
-
-
-function sendWhatsApp(){
-
-
-
-if(cart.length===0){
-
-
-alert("Please add items first");
-
+alert(
+"Please add items to your cart first."
+);
 
 return;
 
+}
+
+
+const button =
+document.getElementById("squarePayBtn");
+
+
+button.disabled = true;
+
+button.innerText =
+"Creating secure payment...";
+
+
+try{
+
+const response =
+await fetch(
+
+"https://mrs-momos-payment.jinesh-patel2376.workers.dev/",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json"
+
+},
+
+body:JSON.stringify({
+
+items:cart.map(item => ({
+
+name:item.name,
+
+price:item.price,
+
+qty:item.qty
+
+}))
+
+})
+
+}
+
+);
+
+
+const result =
+await response.json();
+
+
+if(
+!response.ok ||
+!result.payment_url
+){
+
+console.error(result);
+
+alert(
+"Unable to create payment. Please try again."
+);
+
+button.disabled = false;
+
+button.innerText =
+"💳 Pay Online";
+
+return;
 
 }
 
 
+/* Open Square checkout */
+
+window.location.href =
+result.payment_url;
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Payment connection failed. Please try again."
+);
+
+button.disabled = false;
+
+button.innerText =
+"💳 Pay Online";
+
+}
+
+}
+
+
+/* =========================
+   PAYMENT DROPDOWN
+========================= */
+
+function handlePaymentChange(){
+
+const payment =
+document.getElementById("payment").value;
+
+const squareBox =
+document.getElementById("squarePaymentBox");
+
+
+if(payment === "card"){
+
+squareBox.style.display =
+"block";
+
+}else{
+
+squareBox.style.display =
+"none";
+
+}
+
+}
+
+
+/* =========================
+   WHATSAPP ORDER
+========================= */
+
+function sendWhatsApp(){
+
+if(cart.length === 0){
+
+alert(
+"Please add items first."
+);
+
+return;
+
+}
+
+
+/* Customer information */
+
+let name =
+document.getElementById("customerName").value.trim();
+
+let phone =
+document.getElementById("phone").value.trim();
+
+let pickupDate =
+document.getElementById("pickupDate").value;
+
+let pickupTime =
+document.getElementById("pickupTime").value;
+
+let payment =
+document.getElementById("payment").value;
+
+let notes =
+document.getElementById("notes").value;
+
+
+/* Basic validation */
+
+if(!name){
+
+alert("Please enter your name.");
+
+return;
+
+}
+
+if(!phone){
+
+alert("Please enter your phone number.");
+
+return;
+
+}
+
+if(!pickupDate){
+
+alert("Please select a pickup date.");
+
+return;
+
+}
+
+if(!pickupTime){
+
+alert("Please select a pickup time.");
+
+return;
+
+}
+
+
+/* Build WhatsApp message */
 
 let message =
 "🥟 MR's MOMOS ORDER\n\n";
 
 
-message += "📍 Pickup Location:\n";
-message += "144 Hoover Crescent \n\n";
+/* Pickup */
 
+message +=
+"📍 PICKUP LOCATION\n";
 
-message += "💳 Online Payment Email:\n";
-message += "Pateljenny2620@gmail.com\n\n";
+message +=
+"144 Hoover Crescent\n";
 
+message +=
+"Hamilton Mountain, Ontario\n\n";
 
 
 message +=
+"📲 Exact pickup details are being provided here for your order.\n\n";
 
-"Customer Name: "
 
-+
+/* Payment */
 
-document.getElementById("customerName").value
+message +=
+"💳 PAYMENT INFORMATION\n";
 
-+
+message +=
+"Interac E-Transfer: Pateljenny2620@gmail.com\n\n";
 
+
+/* Customer */
+
+message +=
+"👤 CUSTOMER DETAILS\n";
+
+message +=
+"Name: " +
+name +
 "\n";
 
-
-
 message +=
-
-"Phone: "
-
-+
-
-document.getElementById("phone").value
-
-+
-
-"\n";
-
-
-
-message +=
-
-"Pickup Date: "
-
-+
-
-document.getElementById("pickupDate").value
-
-+
-
-"\n";
-
-
-
-message +=
-
-"Pickup Time: "
-
-+
-
-document.getElementById("pickupTime").value
-
-+
-
-"\n";
-
-
-
-message +=
-
-"Payment: "
-
-+
-
-document.getElementById("payment").value
-
-+
-
+"Phone: " +
+phone +
 "\n\n";
 
 
-
+/* Pickup */
 
 message +=
+"🕒 PICKUP\n";
 
-"Items:\n";
+message +=
+"Date: " +
+pickupDate +
+"\n";
+
+message +=
+"Time: " +
+pickupTime +
+"\n\n";
 
 
+/* Payment method */
 
+message +=
+"Payment Method: " +
+payment +
+"\n\n";
+
+
+/* Items */
+
+message +=
+"🍽️ ITEMS\n";
 
 
 cart.forEach(function(item){
 
-
 message +=
 
-item.qty
-
-+
-
-"x "
-
-+
-
-item.name
-
-+
-
-" - $"
-
-+
-
-(item.price * item.qty).toFixed(2)
-
-+
-
+item.qty +
+"x " +
+item.name +
+" - $" +
+(item.price * item.qty).toFixed(2) +
 "\n";
-
 
 });
 
 
-
+/* Total */
 
 message +=
-
-"\nTotal: $"
-
-+
-
-document.getElementById("total").innerHTML
-
-+
-
+"\n💰 TOTAL: $" +
+document.getElementById("total").innerText +
 " CAD";
 
 
+/* Notes */
 
-
+if(notes.trim()){
 
 message +=
+"\n\n📝 NOTES: " +
+notes;
 
-"\n\nNotes: "
-
-+
-
-document.getElementById("notes").value;
+}
 
 
-
-
-
+/* WhatsApp */
 
 window.open(
 
-"https://wa.me/18252505474?text="
-
-+
-
+"https://wa.me/18252505474?text=" +
 encodeURIComponent(message),
-
 
 "_blank"
 
+);
 
+}
+
+
+/* =========================
+   PICKUP TIMES
+========================= */
+
+function generatePickupTimes(){
+
+const pickup =
+document.getElementById("pickupTime");
+
+if(!pickup) return;
+
+
+pickup.innerHTML = "";
+
+
+/* Current time */
+
+let now =
+new Date();
+
+
+/*
+Customer needs at least
+30 minutes preparation
+*/
+
+now.setMinutes(
+now.getMinutes() + 30
 );
 
 
+/*
+Round UP to next
+15-minute slot
+*/
+
+let minutes =
+now.getMinutes();
+
+let roundedMinutes =
+Math.ceil(minutes / 15) * 15;
+
+
+now.setMinutes(
+roundedMinutes
+);
+
+now.setSeconds(0);
+
+now.setMilliseconds(0);
+
+
+/*
+Restaurant earliest
+pickup = 12:30 PM
+*/
+
+let openTime =
+new Date();
+
+openTime.setHours(
+12,
+30,
+0,
+0
+);
+
+
+/*
+Last pickup = 12:15 AM
+next day
+*/
+
+let closeTime =
+new Date();
+
+closeTime.setDate(
+closeTime.getDate() + 1
+);
+
+closeTime.setHours(
+0,
+15,
+0,
+0
+);
+
+
+/*
+Before opening:
+start at 12:30 PM
+*/
+
+if(now < openTime){
+
+now =
+new Date(openTime);
 
 }
 
-function generatePickupTimes() {
 
-    const pickup = document.getElementById("pickupTime");
+/*
+Create pickup options
+*/
 
-    if (!pickup) return;
+while(now <= closeTime){
 
-    pickup.innerHTML = "";
+let hour =
+now.getHours();
 
-
-    let now = new Date();
-
-
-    // Customer minimum wait time = 30 minutes
-    now.setMinutes(now.getMinutes() + 30);
+let minute =
+now.getMinutes();
 
 
-
-    // Make pickup slots every 15 minutes
-    now.setMinutes(Math.ceil(now.getMinutes() / 15) * 15);
-
+let ampm =
+hour >= 12 ? "PM" : "AM";
 
 
-    // Restaurant opens 12 PM
-    let openTime = new Date();
-
-    openTime.setHours(12,0,0,0);
+let displayHour =
+hour % 12;
 
 
+if(displayHour === 0){
 
-    // Restaurant last pickup 12:15 AM
-    let closeTime = new Date();
-
-    closeTime.setDate(closeTime.getDate()+1);
-    closeTime.setHours(0,15,0,0);
-
-
-
-    // Before opening
-    if(now < openTime){
-
-        now = openTime;
-
-    }
-
-
-
-    while(now <= closeTime){
-
-
-        let hour = now.getHours();
-
-        let minute = now.getMinutes();
-
-
-
-        let ampm = hour >= 12 ? "PM" : "AM";
-
-
-        let displayHour = hour % 12;
-
-        if(displayHour === 0){
-            displayHour = 12;
-        }
-
-
-
-        let time =
-        displayHour + ":" +
-        String(minute).padStart(2,"0") +
-        " " + ampm;
-
-
-
-        let option = document.createElement("option");
-
-        option.value = time;
-
-        option.text =
-        "🕒 " + time;
-
-
-
-        pickup.appendChild(option);
-
-
-
-        now.setMinutes(now.getMinutes()+15);
-
-
-    }
+displayHour = 12;
 
 }
+
+
+let time =
+displayHour +
+":" +
+String(minute).padStart(2,"0") +
+" " +
+ampm;
+
+
+let option =
+document.createElement("option");
+
+
+option.value =
+time;
+
+option.text =
+"🕒 " + time;
+
+
+pickup.appendChild(
+option
+);
+
+
+now.setMinutes(
+now.getMinutes() + 15
+);
+
+}
+
+}
+
+
+/* Run pickup time system */
+
 generatePickupTimes();
 
-function handlePaymentChange() {
 
-    const payment =
-        document.getElementById("payment").value;
-
-    const squareBox =
-        document.getElementById("squarePaymentBox");
-
-    if (payment === "card") {
-
-        squareBox.style.display = "block";
-
-    } else {
-
-        squareBox.style.display = "none";
-
-    }
-}
-.square-pay-btn{
-
-width:100%;
-
-background:#111;
-
-color:white;
-
-border:none;
-
-padding:14px;
-
-border-radius:10px;
-
-font-size:17px;
-
-font-weight:600;
-
-cursor:pointer;
-
-}
-
-.square-pay-btn:hover{
-
-opacity:.9;
-
-}
-
-.payment-note{
-
-text-align:center;
-
-font-size:13px;
-
-color:#777;
-
-margin-top:8px;
-
-}
-  
 </script>
-
 
 
 </body>
 
 </html>
-
