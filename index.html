@@ -1870,10 +1870,10 @@ await response.json();
 
 if (!response.ok || !result.payment_url) {
 
-    console.error("SQUARE WORKER RESPONSE:", result);
+    console.error("SQUARE ERROR:", result);
 
     alert(
-        "Square Error:\n\n" +
+        "SQUARE ERROR:\n\n" +
         JSON.stringify(result, null, 2)
     );
 
