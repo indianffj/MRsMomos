@@ -1136,22 +1136,42 @@ Pickup Time
 Payment Method
 </label>
 
+<select id="payment" onchange="handlePaymentChange()">
 
-<select id="payment">
+    <option value="pickup">
+        Pay at Pickup
+    </option>
 
+    <option value="etransfer">
+        Interac e-Transfer
+    </option>
 
-<option>
-Pay At Pickup
-</option>
-
-
-<option>
-Interac E-Transfer
-</option>
-
+    <option value="card">
+        💳 Pay Online by Card
+    </option>
 
 </select>
 
+
+<!-- Square Online Payment -->
+
+<div id="squarePaymentBox" style="display:none;">
+
+    <button
+        type="button"
+        id="squarePayBtn"
+        class="square-pay-btn"
+        onclick="payWithSquare()">
+
+        💳 Pay Online
+
+    </button>
+
+    <p class="payment-note">
+        Secure payment powered by Square
+    </p>
+
+</div>
 
 
 
@@ -1566,7 +1586,70 @@ behavior:"smooth"
 
 
 
+async function payWithSquare() {
 
+    if (cart.length === 0) {
+        alert("Please add items to your cart first.");
+        return;
+    }
+
+    const button = document.getElementById("squarePayBtn");
+
+    button.disabled = true;
+    button.innerText = "Creating secure payment...";
+
+    try {
+
+        const response = await fetch(
+            "https://mrs-momos-payment.jinesh-patel2376.workers.dev/",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    items: cart.map(item => ({
+                        name: item.name,
+                        price: item.price,
+                        qty: item.qty
+                    }))
+                })
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.payment_url) {
+
+            console.error(result);
+
+            alert(
+                "Unable to create payment. Please try again or choose another payment method."
+            );
+
+            button.disabled = false;
+            button.innerText = "💳 Pay Online";
+
+            return;
+        }
+
+        // Open Square's secure checkout
+        window.location.href = result.payment_url;
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Payment connection failed. Please try again."
+        );
+
+        button.disabled = false;
+        button.innerText = "💳 Pay Online";
+    }
+}
 
 
 // WHATSAPP ORDER
@@ -1854,6 +1937,65 @@ function generatePickupTimes() {
 
 }
 generatePickupTimes();
+
+function handlePaymentChange() {
+
+    const payment =
+        document.getElementById("payment").value;
+
+    const squareBox =
+        document.getElementById("squarePaymentBox");
+
+    if (payment === "card") {
+
+        squareBox.style.display = "block";
+
+    } else {
+
+        squareBox.style.display = "none";
+
+    }
+}
+.square-pay-btn{
+
+width:100%;
+
+background:#111;
+
+color:white;
+
+border:none;
+
+padding:14px;
+
+border-radius:10px;
+
+font-size:17px;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+.square-pay-btn:hover{
+
+opacity:.9;
+
+}
+
+.payment-note{
+
+text-align:center;
+
+font-size:13px;
+
+color:#777;
+
+margin-top:8px;
+
+}
+  
 </script>
 
 
