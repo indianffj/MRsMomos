@@ -1804,104 +1804,85 @@ behavior:"smooth"
    SQUARE PAYMENT
 ========================= */
 
-async function payWithSquare(){
+async function payWithSquare() {
 
-    if(cart.length === 0){
-
+    if (cart.length === 0) {
         alert("Please add items to your cart first.");
-
         return;
     }
 
-    const button =
-        document.getElementById("squarePayBtn");
+    const button = document.getElementById("squarePayBtn");
 
     button.disabled = true;
-    button.innerText =
-        "Creating secure payment...";
+    button.innerText = "Connecting to Square...";
 
-    try{
+    try {
 
-        const response =
-            await fetch(
-                "https://mrs-momos-payment.jinesh-patel2376.workers.dev/",
-                {
-                    method:"POST",
+        const response = await fetch(
+            "https://mrs-momos-payment.jinesh-patel2376.workers.dev/",
+            {
+                method: "POST",
 
-                    headers:{
-                        "Content-Type":
-                            "application/json"
-                    },
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-                    body:JSON.stringify({
-
-                        items:cart.map(item => ({
-                            name:item.name,
-                            price:Number(item.price),
-                            qty:Number(item.qty)
-                        }))
-
-                    })
-                }
-            );
-
-        const result =
-            await response.json();
-
-        console.log(
-            "Square response:",
-            result
+                body: JSON.stringify({
+                    items: cart.map(item => ({
+                        name: item.name,
+                        price: Number(item.price),
+                        qty: Number(item.qty)
+                    }))
+                })
+            }
         );
 
-        if(
-            !response.ok ||
-            !result.payment_url
-        ){
+        const text = await response.text();
+
+        console.log("HTTP STATUS:", response.status);
+        console.log("SQUARE RAW RESPONSE:", text);
+
+        let result;
+
+        try {
+            result = JSON.parse(text);
+        } catch {
+            result = {
+                raw_response: text
+            };
+        }
+
+        if (!response.ok || !result.payment_url) {
 
             alert(
-                "SQUARE ERROR:\n\n" +
-                JSON.stringify(
-                    result,
-                    null,
-                    2
-                )
+                "SQUARE ERROR\n\n" +
+                "HTTP Status: " +
+                response.status +
+                "\n\n" +
+                JSON.stringify(result, null, 2)
             );
 
             button.disabled = false;
-
-            button.innerText =
-                "💳 Pay Online";
+            button.innerText = "💳 Pay Online";
 
             return;
         }
 
-        /*
-        Square checkout
-        */
+        window.location.href = result.payment_url;
 
-        window.location.href =
-            result.payment_url;
+    } catch (error) {
 
-    }
-    catch(error){
-
-        console.error(
-            "Payment error:",
-            error
-        );
+        console.error(error);
 
         alert(
-            "Payment connection failed:\n\n" +
+            "CONNECTION ERROR\n\n" +
             error.message
         );
 
         button.disabled = false;
-
-        button.innerText =
-            "💳 Pay Online";
+        button.innerText = "💳 Pay Online";
     }
 }
-
 
 /* =========================
    PAYMENT DROPDOWN
