@@ -1806,105 +1806,100 @@ behavior:"smooth"
 
 async function payWithSquare(){
 
-if(cart.length === 0){
+    if(cart.length === 0){
 
-alert(
-"Please add items to your cart first."
-);
+        alert("Please add items to your cart first.");
 
-return;
+        return;
+    }
 
-}
+    const button =
+        document.getElementById("squarePayBtn");
 
+    button.disabled = true;
+    button.innerText =
+        "Creating secure payment...";
 
-const button =
-document.getElementById("squarePayBtn");
+    try{
 
+        const response =
+            await fetch(
+                "https://mrs-momos-payment.jinesh-patel2376.workers.dev/",
+                {
+                    method:"POST",
 
-button.disabled = true;
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
 
-button.innerText =
-"Creating secure payment...";
+                    body:JSON.stringify({
 
+                        items:cart.map(item => ({
+                            name:item.name,
+                            price:Number(item.price),
+                            qty:Number(item.qty)
+                        }))
 
-try{
+                    })
+                }
+            );
 
-const response =
-await fetch(
+        const result =
+            await response.json();
 
-"https://mrs-momos-payment.jinesh-patel2376.workers.dev/",
+        console.log(
+            "Square response:",
+            result
+        );
 
-{
+        if(
+            !response.ok ||
+            !result.payment_url
+        ){
 
-method:"POST",
+            alert(
+                "SQUARE ERROR:\n\n" +
+                JSON.stringify(
+                    result,
+                    null,
+                    2
+                )
+            );
 
-headers:{
+            button.disabled = false;
 
-"Content-Type":
-"application/json"
+            button.innerText =
+                "💳 Pay Online";
 
-},
+            return;
+        }
 
-body:JSON.stringify({
+        /*
+        Square checkout
+        */
 
-items:cart.map(item => ({
+        window.location.href =
+            result.payment_url;
 
-name:item.name,
+    }
+    catch(error){
 
-price:item.price,
+        console.error(
+            "Payment error:",
+            error
+        );
 
-qty:item.qty
+        alert(
+            "Payment connection failed:\n\n" +
+            error.message
+        );
 
-}))
+        button.disabled = false;
 
-})
-
-}
-
-);
-
-
-const result =
-await response.json();
-
-
-if (!response.ok || !result.payment_url) {
-
-    console.error("SQUARE ERROR:", result);
-
-    alert(
-        "SQUARE ERROR:\n\n" +
-        JSON.stringify(result, null, 2)
-    );
-
-    button.disabled = false;
-    button.innerText = "💳 Pay Online";
-
-    return;
-}
-
-
-/* Open Square checkout */
-
-window.location.href =
-result.payment_url;
-
-
-}catch(error){
-
-console.error(error);
-
-alert(
-"Payment connection failed. Please try again."
-);
-
-button.disabled = false;
-
-button.innerText =
-"💳 Pay Online";
-
-}
-
+        button.innerText =
+            "💳 Pay Online";
+    }
 }
 
 
