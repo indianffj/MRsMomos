@@ -30,7 +30,48 @@ background:#fff8f0;
 color:#333;
 }
 
+/* TEMPORARY CLOSURE BANNER */
 
+.closure-banner{
+    background:#c1121f;
+    color:white;
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    text-align:center;
+    font-size:16px;
+}
+
+.closure-icon{
+    font-size:32px;
+}
+
+.closure-banner strong{
+    font-size:20px;
+}
+
+.closure-banner p{
+    margin:4px 0 0;
+    font-size:14px;
+}
+
+@media(max-width:700px){
+
+    .closure-banner{
+        padding:14px 12px;
+    }
+
+    .closure-banner strong{
+        font-size:17px;
+    }
+
+    .closure-banner p{
+        font-size:13px;
+    }
+
+}
 /* =========================
    TOP MARQUEE
 ========================= */
@@ -2272,7 +2313,278 @@ now.getMinutes() + 15
 
 generatePickupTimes();
 
+/* =========================
+   ONE-TIME CLOSURE
+   CLOSED:
+   AUGUST 21 & 22, 2026
 
+   REOPENS:
+   AUGUST 23, 2026
+========================= */
+
+function checkTemporaryClosure() {
+
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = now.getMonth(); // August = 7
+    const day = now.getDate();
+
+
+    // ONLY August 21 and 22, 2026
+    const isClosed =
+        year === 2026 &&
+        month === 7 &&
+        (day === 21 || day === 22);
+
+
+    const addButtons =
+        document.querySelectorAll(".add-btn");
+
+    const whatsappButton =
+        document.querySelector(".whatsapp");
+
+    const orderButtons =
+        document.querySelectorAll('a[href="#menu"]');
+
+    const cartButton =
+        document.querySelector(".cart-count");
+
+    const payment =
+        document.getElementById("payment");
+
+    const pickupTime =
+        document.getElementById("pickupTime");
+
+    const banner =
+        document.getElementById("closureBanner");
+
+
+    if (isClosed) {
+
+        /* ADD TO CART */
+
+        addButtons.forEach(function(button) {
+
+            button.disabled = true;
+
+            button.innerText =
+                "🔴 CLOSED";
+
+            button.style.opacity = "0.45";
+
+            button.style.cursor =
+                "not-allowed";
+
+        });
+
+
+        /* WHATSAPP ORDER */
+
+        if (whatsappButton) {
+
+            whatsappButton.disabled = true;
+
+            whatsappButton.innerText =
+                "🔴 Orders Closed — Reopens Sunday";
+
+            whatsappButton.style.opacity =
+                "0.45";
+
+            whatsappButton.style.cursor =
+                "not-allowed";
+
+            whatsappButton.onclick =
+                function(event) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "🥟 MR's Momos is closed Friday & Saturday.\n\nWe reopen Sunday, August 23. ❤️"
+                    );
+
+                    return false;
+                };
+        }
+
+
+        /* ORDER NOW */
+
+        orderButtons.forEach(function(button) {
+
+            button.innerText =
+                "🔴 CLOSED";
+
+            button.onclick =
+                function(event) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "🥟 MR's Momos is temporarily closed.\n\nWe reopen Sunday, August 23. ❤️"
+                    );
+
+                    return false;
+                };
+
+            button.style.opacity =
+                "0.6";
+
+        });
+
+
+        /* CART */
+
+        if (cartButton) {
+
+            cartButton.style.opacity =
+                "0.5";
+
+            cartButton.style.cursor =
+                "not-allowed";
+
+            cartButton.onclick =
+                function(event) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "🔴 Ordering is temporarily closed.\n\nWe reopen Sunday, August 23. ❤️"
+                    );
+
+                    return false;
+                };
+        }
+
+
+        /* PAYMENT */
+
+        if (payment) {
+
+            payment.disabled = true;
+
+        }
+
+
+        /* PICKUP TIME */
+
+        if (pickupTime) {
+
+            pickupTime.disabled = true;
+
+        }
+
+
+        /* CLOSURE BANNER */
+
+        if (banner) {
+
+            banner.style.display =
+                "flex";
+
+        }
+
+    }
+
+    else {
+
+        /*
+        From August 23, 2026 onward,
+        everything is automatically normal.
+        */
+
+        addButtons.forEach(function(button) {
+
+            button.disabled = false;
+
+            button.innerText =
+                "Add To Cart";
+
+            button.style.opacity =
+                "1";
+
+            button.style.cursor =
+                "pointer";
+
+        });
+
+
+        if (whatsappButton) {
+
+            whatsappButton.disabled = false;
+
+            whatsappButton.innerText =
+                "💬 Place Order On WhatsApp";
+
+            whatsappButton.style.opacity =
+                "1";
+
+            whatsappButton.style.cursor =
+                "pointer";
+
+            whatsappButton.onclick =
+                null;
+
+        }
+
+
+        orderButtons.forEach(function(button) {
+
+            button.innerText =
+                "Order Now";
+
+            button.style.opacity =
+                "1";
+
+            button.onclick =
+                null;
+
+        });
+
+
+        if (cartButton) {
+
+            cartButton.style.opacity =
+                "1";
+
+            cartButton.style.cursor =
+                "pointer";
+
+            cartButton.onclick =
+                null;
+
+        }
+
+
+        if (payment) {
+
+            payment.disabled = false;
+
+        }
+
+
+        if (pickupTime) {
+
+            pickupTime.disabled = false;
+
+        }
+
+
+        if (banner) {
+
+            banner.style.display =
+                "none";
+
+        }
+
+    }
+
+}
+
+
+/* Run automatically */
+
+checkTemporaryClosure();
 </script>
 
 
