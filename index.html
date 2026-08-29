@@ -2312,7 +2312,124 @@ now.getMinutes() + 15
 /* Run pickup time system */
 
 generatePickupTimes();
+/* =========================
+   STORE CLOSED TODAY
+   AUGUST 29, 2026
+========================= */
 
+function closeStoreToday() {
+
+    const now = new Date();
+
+    const isClosed =
+        now.getFullYear() === 2026 &&
+        now.getMonth() === 7 &&
+        now.getDate() === 29;
+
+    if (!isClosed) return;
+
+
+    /* Disable Add To Cart */
+
+    document.querySelectorAll(".add-btn").forEach(function(button) {
+
+        button.disabled = true;
+
+        button.innerText = "🔴 CLOSED TODAY";
+
+        button.style.opacity = "0.45";
+
+        button.style.cursor = "not-allowed";
+
+    });
+
+
+    /* Disable WhatsApp Order */
+
+    const whatsappButton =
+        document.querySelector(".whatsapp");
+
+    if (whatsappButton) {
+
+        whatsappButton.innerText =
+            "🔴 Orders Closed Today";
+
+        whatsappButton.style.opacity =
+            "0.45";
+
+        whatsappButton.style.cursor =
+            "not-allowed";
+
+        whatsappButton.onclick =
+            function(event) {
+
+                event.preventDefault();
+
+                alert(
+                    "🥟 MR's Momos is closed today.\n\n" +
+                    "Online ordering will reopen tomorrow. ❤️"
+                );
+
+                return false;
+            };
+    }
+
+
+    /* Disable Cart */
+
+    const cartButton =
+        document.querySelector(".cart-count");
+
+    if (cartButton) {
+
+        cartButton.style.opacity = "0.5";
+
+        cartButton.style.cursor = "not-allowed";
+
+        cartButton.onclick =
+            function(event) {
+
+                event.preventDefault();
+
+                alert(
+                    "🔴 Ordering is closed today.\n\n" +
+                    "Please come back tomorrow. ❤️"
+                );
+
+                return false;
+            };
+    }
+
+
+    /* Disable Payment */
+
+    const payment =
+        document.getElementById("payment");
+
+    if (payment) {
+
+        payment.disabled = true;
+
+    }
+
+
+    /* Disable Pickup Time */
+
+    const pickupTime =
+        document.getElementById("pickupTime");
+
+    if (pickupTime) {
+
+        pickupTime.disabled = true;
+
+    }
+
+}
+
+
+/* Run closure */
+
+closeStoreToday();
 
 </script>
 
