@@ -2313,23 +2313,51 @@ now.getMinutes() + 15
 
 generatePickupTimes();
 /* =========================
-   STORE CLOSED TODAY
+   MR'S MOMOS — CLOSED TODAY
    AUGUST 29, 2026
 ========================= */
 
-function closeStoreToday() {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const now = new Date();
+    const today = new Date();
 
-    const isClosed =
-        now.getFullYear() === 2026 &&
-        now.getMonth() === 7 &&
-        now.getDate() === 29;
+    const closedToday =
+        today.getFullYear() === 2026 &&
+        today.getMonth() === 7 &&
+        today.getDate() === 29;
 
-    if (!isClosed) return;
+    if (!closedToday) return;
 
 
-    /* Disable Add To Cart */
+    /* =========================
+       ORDER NOW BUTTON
+    ========================= */
+
+    document.querySelectorAll('a[href="#menu"]').forEach(function(button) {
+
+        button.innerText = "🔴 CLOSED TODAY";
+
+        button.style.pointerEvents = "auto";
+        button.style.opacity = "0.6";
+
+        button.onclick = function(event) {
+
+            event.preventDefault();
+
+            alert(
+                "🥟 MR's Momos is CLOSED today.\n\n" +
+                "Online ordering will reopen tomorrow. ❤️"
+            );
+
+            return false;
+        };
+
+    });
+
+
+    /* =========================
+       ADD TO CART BUTTONS
+    ========================= */
 
     document.querySelectorAll(".add-btn").forEach(function(button) {
 
@@ -2341,67 +2369,57 @@ function closeStoreToday() {
 
         button.style.cursor = "not-allowed";
 
+        button.onclick = function(event) {
+
+            event.preventDefault();
+
+            alert(
+                "🔴 Online ordering is closed today.\n\n" +
+                "Please come back tomorrow. ❤️"
+            );
+
+            return false;
+        };
+
     });
 
 
-    /* Disable WhatsApp Order */
+    /* =========================
+       WHATSAPP ORDER BUTTON
+    ========================= */
 
     const whatsappButton =
         document.querySelector(".whatsapp");
 
     if (whatsappButton) {
 
+        whatsappButton.disabled = true;
+
         whatsappButton.innerText =
             "🔴 Orders Closed Today";
 
-        whatsappButton.style.opacity =
-            "0.45";
+        whatsappButton.style.opacity = "0.45";
 
-        whatsappButton.style.cursor =
-            "not-allowed";
+        whatsappButton.style.cursor = "not-allowed";
 
-        whatsappButton.onclick =
-            function(event) {
+        whatsappButton.onclick = function(event) {
 
-                event.preventDefault();
+            event.preventDefault();
 
-                alert(
-                    "🥟 MR's Momos is closed today.\n\n" +
-                    "Online ordering will reopen tomorrow. ❤️"
-                );
+            alert(
+                "🥟 MR's Momos is CLOSED today.\n\n" +
+                "Online ordering will reopen tomorrow. ❤️"
+            );
 
-                return false;
-            };
+            return false;
+        };
+
     }
 
 
-    /* Disable Cart */
-
-    const cartButton =
-        document.querySelector(".cart-count");
-
-    if (cartButton) {
-
-        cartButton.style.opacity = "0.5";
-
-        cartButton.style.cursor = "not-allowed";
-
-        cartButton.onclick =
-            function(event) {
-
-                event.preventDefault();
-
-                alert(
-                    "🔴 Ordering is closed today.\n\n" +
-                    "Please come back tomorrow. ❤️"
-                );
-
-                return false;
-            };
-    }
-
-
-    /* Disable Payment */
+    /* =========================
+       PAYMENT
+    ========================= */
 
     const payment =
         document.getElementById("payment");
@@ -2413,7 +2431,9 @@ function closeStoreToday() {
     }
 
 
-    /* Disable Pickup Time */
+    /* =========================
+       PICKUP TIME
+    ========================= */
 
     const pickupTime =
         document.getElementById("pickupTime");
@@ -2424,12 +2444,33 @@ function closeStoreToday() {
 
     }
 
-}
 
+    /* =========================
+       CART BUTTON
+    ========================= */
 
-/* Run closure */
+    const cartButton =
+        document.querySelector(".cart-count");
 
-closeStoreToday();
+    if (cartButton) {
+
+        cartButton.style.opacity = "0.5";
+
+        cartButton.onclick = function(event) {
+
+            event.preventDefault();
+
+            alert(
+                "🔴 Ordering is closed today.\n\n" +
+                "Online ordering will reopen tomorrow. ❤️"
+            );
+
+            return false;
+        };
+
+    }
+
+});
 
 </script>
 
