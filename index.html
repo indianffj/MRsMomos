@@ -2471,7 +2471,112 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+/* =========================
+   MR'S MOMOS — SOLD OUT
+   AUGUST 30, 2026
+========================= */
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const today = new Date();
+
+    const soldOutToday =
+        today.getFullYear() === 2026 &&
+        today.getMonth() === 7 &&
+        today.getDate() === 30;
+
+    if (!soldOutToday) return;
+
+
+    /* SOLD OUT BANNER */
+
+    const banner = document.createElement("div");
+
+    banner.innerHTML =
+        "🥟 <strong>SOLD OUT TODAY</strong> — " +
+        "Thank you for your support! ❤️";
+
+    banner.style.background = "#c1121f";
+    banner.style.color = "white";
+    banner.style.textAlign = "center";
+    banner.style.padding = "14px";
+    banner.style.fontSize = "18px";
+    banner.style.fontWeight = "600";
+
+    document.body.insertBefore(
+        banner,
+        document.body.firstChild
+    );
+
+
+    /* DISABLE ALL ADD TO CART */
+
+    document.querySelectorAll(".add-btn").forEach(function(button) {
+
+        button.disabled = true;
+
+        button.innerText = "🔴 SOLD OUT";
+
+        button.style.opacity = "0.5";
+
+        button.style.cursor = "not-allowed";
+
+        button.onclick = function(event) {
+
+            event.preventDefault();
+
+            alert(
+                "🥟 Sorry, we're SOLD OUT today!\n\n" +
+                "Thank you for your support. ❤️"
+            );
+
+            return false;
+        };
+
+    });
+
+
+    /* DISABLE WHATSAPP ORDER */
+
+    const whatsappButton =
+        document.querySelector(".whatsapp");
+
+    if (whatsappButton) {
+
+        whatsappButton.disabled = true;
+
+        whatsappButton.innerText =
+            "🔴 SOLD OUT — No More Orders";
+
+        whatsappButton.style.opacity = "0.5";
+
+        whatsappButton.onclick = function(event) {
+
+            event.preventDefault();
+
+            alert(
+                "🥟 Sorry, MR's Momos is SOLD OUT today!\n\n" +
+                "Please come back tomorrow. ❤️"
+            );
+
+            return false;
+        };
+
+    }
+
+
+    /* DISABLE PAYMENT */
+
+    const payment =
+        document.getElementById("payment");
+
+    if (payment) {
+
+        payment.disabled = true;
+
+    }
+
+});
 </script>
 
 
