@@ -2310,30 +2310,27 @@ now.getMinutes() + 15
 
 
 /* Run pickup time system */
-
 generatePickupTimes();
-<script>
-/* =========================
+
+
+/* =====================================================
    MR'S MOMOS — CLOSED SEPTEMBER 5, 2026
-   Automatically reopens September 6
-========================= */
+   Automatically reopens September 6, 2026
+===================================================== */
 
-document.addEventListener("DOMContentLoaded", function () {
+(function () {
 
-    const today = new Date();
+    const now = new Date();
 
     const closedToday =
-        today.getFullYear() === 2026 &&
-        today.getMonth() === 8 &&   // September = 8
-        today.getDate() === 5;
+        now.getFullYear() === 2026 &&
+        now.getMonth() === 8 &&   // September = 8
+        now.getDate() === 5;
 
-    // If it is not September 5, do nothing
     if (!closedToday) return;
 
 
-    /* =========================
-       SHOW CLOSED BANNER
-    ========================= */
+    /* CLOSED BANNER */
 
     const banner = document.createElement("div");
 
@@ -2346,7 +2343,7 @@ document.addEventListener("DOMContentLoaded", function () {
         background:#c1121f;
         color:white;
         text-align:center;
-        padding:14px;
+        padding:14px 12px;
         font-size:17px;
         font-weight:600;
         position:relative;
@@ -2356,56 +2353,59 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.insertBefore(banner, document.body.firstChild);
 
 
-    /* =========================
-       DISABLE ORDER NOW BUTTONS
-    ========================= */
+    /* DISABLE ALL MENU / ORDER-NOW LINKS */
 
-    document.querySelectorAll('a[href="#menu"]').forEach(function(button) {
+    document.querySelectorAll('a[href="#menu"]').forEach(function (button) {
 
         button.textContent = "🔴 CLOSED TODAY";
-
         button.style.pointerEvents = "none";
-        button.style.opacity = "0.6";
+        button.style.opacity = "0.55";
 
-        button.addEventListener("click", function(e) {
-            e.preventDefault();
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
         });
 
     });
 
 
-    /* =========================
-       DISABLE ADD TO CART
-    ========================= */
+    /* DISABLE ALL ADD-TO-CART BUTTONS */
 
-    document.querySelectorAll(".add-btn").forEach(function(button) {
+    document.querySelectorAll(".add-btn").forEach(function (button) {
 
         button.disabled = true;
         button.textContent = "🔴 CLOSED TODAY";
-
         button.style.opacity = "0.5";
         button.style.cursor = "not-allowed";
 
     });
 
 
-    /* =========================
-       DISABLE WHATSAPP ORDER
-    ========================= */
+    /* DISABLE WHATSAPP ORDER BUTTON */
 
-    document.querySelectorAll(".whatsapp").forEach(function(button) {
+    document.querySelectorAll(".whatsapp").forEach(function (button) {
 
-        button.style.pointerEvents = "none";
-        button.style.opacity = "0.5";
-
+        button.disabled = true;
         button.textContent = "🔴 Orders Closed Today";
+        button.style.opacity = "0.5";
+        button.style.cursor = "not-allowed";
+
+        button.onclick = function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            alert(
+                "🔴 MR's Momos is CLOSED today.\n\n" +
+                "Online ordering will reopen tomorrow. ❤️"
+            );
+
+            return false;
+        };
 
     });
 
 
-    /* =========================
-       DISABLE PAYMENT
-    ========================= */
+    /* DISABLE PAYMENT */
 
     const payment = document.getElementById("payment");
 
@@ -2414,9 +2414,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
-       DISABLE PICKUP TIME
-    ========================= */
+    /* DISABLE PICKUP TIME */
 
     const pickupTime = document.getElementById("pickupTime");
 
@@ -2425,65 +2423,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
-       DISABLE CHECKOUT / ORDER BUTTON
-    ========================= */
+    /* DISABLE CART BUTTON */
 
-    document.querySelectorAll(
-        '#checkoutBtn, .checkout-btn, button[type="submit"]'
-    ).forEach(function(button) {
-
-        button.disabled = true;
-        button.style.opacity = "0.5";
-        button.style.cursor = "not-allowed";
-
-    });
-
-});
-</script>
-
-    /* =========================
-       PAYMENT
-    ========================= */
-
-    const payment =
-        document.getElementById("payment");
-
-    if (payment) {
-
-        payment.disabled = true;
-
-    }
-
-
-    /* =========================
-       PICKUP TIME
-    ========================= */
-
-    const pickupTime =
-        document.getElementById("pickupTime");
-
-    if (pickupTime) {
-
-        pickupTime.disabled = true;
-
-    }
-
-
-    /* =========================
-       CART BUTTON
-    ========================= */
-
-    const cartButton =
-        document.querySelector(".cart-count");
+    const cartButton = document.querySelector(".cart-count");
 
     if (cartButton) {
 
         cartButton.style.opacity = "0.5";
+        cartButton.style.cursor = "not-allowed";
 
-        cartButton.onclick = function(event) {
+        cartButton.onclick = function (event) {
 
             event.preventDefault();
+            event.stopPropagation();
 
             alert(
                 "🔴 Ordering is closed today.\n\n" +
@@ -2492,10 +2444,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
             return false;
         };
-
     }
 
-});
+
+    /* DISABLE SQUARE BUTTON IF PRESENT */
+
+    const squareButton = document.getElementById("squarePayBtn");
+
+    if (squareButton) {
+        squareButton.disabled = true;
+        squareButton.textContent = "🔴 CLOSED TODAY";
+        squareButton.style.opacity = "0.5";
+    }
+
+
+    /* DISABLE ANY SUBMIT / CHECKOUT BUTTON */
+
+    document.querySelectorAll(
+        '#checkoutBtn, .checkout-btn, button[type="submit"]'
+    ).forEach(function (button) {
+
+        button.disabled = true;
+        button.style.opacity = "0.5";
+        button.style.cursor = "not-allowed";
+
+    });
+
+})();
+
+
 /* =========================
    MR'S MOMOS — SOLD OUT
    AUGUST 30, 2026
@@ -2603,7 +2580,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-
 
 </body>
 
