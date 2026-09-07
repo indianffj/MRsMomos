@@ -2474,8 +2474,9 @@ generatePickupTimes();
 
 
 /* =========================
-   MR'S MOMOS — SOLD OUT
-   AUGUST 30, 2026
+   MR'S MOMOS — CLOSED TOMORROW
+   SEPTEMBER 8, 2026
+   Automatically reopens September 9, 2026
 ========================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -2484,8 +2485,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const soldOutToday =
         today.getFullYear() === 2026 &&
-        today.getMonth() === 7 &&
-        today.getDate() === 30;
+        today.getMonth() === 8 &&
+        today.getDate() === 8;
 
     if (!soldOutToday) return;
 
@@ -2495,7 +2496,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const banner = document.createElement("div");
 
     banner.innerHTML =
-        "🥟 <strong>SOLD OUT TODAY</strong> — " +
+        "🥟 <strong>CLOSED TODAY</strong> — " +
         "Thank you for your support! ❤️";
 
     banner.style.background = "#c1121f";
@@ -2517,7 +2518,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         button.disabled = true;
 
-        button.innerText = "🔴 SOLD OUT";
+        button.innerText = "🔴 CLOSED";
 
         button.style.opacity = "0.5";
 
@@ -2528,7 +2529,7 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
 
             alert(
-                "🥟 Sorry, we're SOLD OUT today!\n\n" +
+                "🥟 Sorry, we're CLOSED today!\n\n" +
                 "Thank you for your support. ❤️"
             );
 
@@ -2548,7 +2549,7 @@ document.addEventListener("DOMContentLoaded", function () {
         whatsappButton.disabled = true;
 
         whatsappButton.innerText =
-            "🔴 SOLD OUT — No More Orders";
+            "🔴 CLOSED — No More Orders";
 
         whatsappButton.style.opacity = "0.5";
 
@@ -2557,7 +2558,7 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
 
             alert(
-                "🥟 Sorry, MR's Momos is SOLD OUT today!\n\n" +
+                "🥟 Sorry, MR's Momos is CLOSED today!\n\n" +
                 "Please come back tomorrow. ❤️"
             );
 
@@ -2579,6 +2580,125 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+
+/* =====================================================
+   MR'S MOMOS — SOLD OUT TODAY + CLOSED TOMORROW
+   SOLD OUT: SEPTEMBER 7, 2026
+   CLOSED: SEPTEMBER 8, 2026
+   NORMAL ORDERS RETURN: SEPTEMBER 9, 2026
+===================================================== */
+
+(function () {
+
+    const now = new Date();
+
+    const isSoldOutToday =
+        now.getFullYear() === 2026 &&
+        now.getMonth() === 8 &&
+        now.getDate() === 7;
+
+    const isClosedTomorrow =
+        now.getFullYear() === 2026 &&
+        now.getMonth() === 8 &&
+        now.getDate() === 8;
+
+    if (!isSoldOutToday && !isClosedTomorrow) return;
+
+    const message = isSoldOutToday
+        ? "🥟 <strong>SOLD OUT TODAY</strong> — Thank you for your support! ❤️"
+        : "🔴 <strong>MR's Momos is CLOSED TODAY</strong> — Online ordering reopens September 9 ❤️";
+
+    const alertMessage = isSoldOutToday
+        ? "🥟 Sorry, MR's Momos is SOLD OUT today!\n\nThank you for your support. ❤️"
+        : "🔴 MR's Momos is CLOSED today.\n\nOnline ordering will reopen September 9. ❤️";
+
+    const banner = document.createElement("div");
+    banner.innerHTML = message;
+    banner.style.cssText = `
+        background:#c1121f;
+        color:white;
+        text-align:center;
+        padding:14px 12px;
+        font-size:18px;
+        font-weight:600;
+        position:relative;
+        z-index:99999;
+    `;
+    document.body.insertBefore(banner, document.body.firstChild);
+
+    /* Disable ordering/menu buttons */
+    document.querySelectorAll('a[href="#menu"], .order-btn').forEach(function(button) {
+        button.style.pointerEvents = "none";
+        button.style.opacity = "0.55";
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+    });
+
+    /* Disable all Add To Cart buttons */
+    document.querySelectorAll(".add-btn").forEach(function(button) {
+        button.disabled = true;
+        button.innerText = isSoldOutToday ? "🔴 SOLD OUT" : "🔴 CLOSED TODAY";
+        button.style.opacity = "0.5";
+        button.style.cursor = "not-allowed";
+        button.onclick = function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            alert(alertMessage);
+            return false;
+        };
+    });
+
+    /* Disable WhatsApp */
+    document.querySelectorAll(".whatsapp").forEach(function(button) {
+        button.disabled = true;
+        button.innerText = isSoldOutToday
+            ? "🔴 SOLD OUT — No More Orders"
+            : "🔴 Orders Closed Today";
+        button.style.opacity = "0.5";
+        button.style.cursor = "not-allowed";
+        button.onclick = function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            alert(alertMessage);
+            return false;
+        };
+    });
+
+    /* Disable payment and pickup */
+    const payment = document.getElementById("payment");
+    if (payment) payment.disabled = true;
+
+    const pickupTime = document.getElementById("pickupTime");
+    if (pickupTime) pickupTime.disabled = true;
+
+    /* Disable cart */
+    const cartButton = document.querySelector(".cart-count");
+    if (cartButton) {
+        cartButton.style.opacity = "0.5";
+        cartButton.style.cursor = "not-allowed";
+        cartButton.onclick = function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            alert(alertMessage);
+            return false;
+        };
+    }
+
+    /* Disable checkout / submit */
+    document.querySelectorAll(
+        "#checkoutBtn, .checkout-btn, button[type='submit'], #squarePayBtn"
+    ).forEach(function(button) {
+        button.disabled = true;
+        button.innerText = isSoldOutToday ? "🔴 SOLD OUT" : "🔴 CLOSED TODAY";
+        button.style.opacity = "0.5";
+        button.style.cursor = "not-allowed";
+    });
+
+})();
+
 </script>
 
 </body>
