@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MR's Momos — Store Control</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f5f5f5;margin:0;padding:30px;color:#222}.box{max-width:520px;margin:auto;background:#fff;padding:28px;border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,.1)}h1{margin-top:0}input,button,textarea{width:100%;box-sizing:border-box;padding:13px;margin:7px 0;border-radius:10px;border:1px solid #ccc;font-size:16px}button{border:0;cursor:pointer;font-weight:700}.open{background:#198754;color:#fff}.sold{background:#dc3545;color:#fff}.closed{background:#343a40;color:#fff}.logout{background:#eee}.hidden{display:none}.status{padding:15px;border-radius:12px;background:#f1f1f1;margin:15px 0;font-weight:700}.small{font-size:13px;color:#666}.ok{color:#198754}.err{color:#c1121f}</style>
+</head>
+<body>
+<div class="box">
+<h1>🥟 MR's Momos</h1>
+<p><strong>Store Control</strong></p>
+<p class="small">Use this page to instantly OPEN, mark SOLD OUT, or CLOSE the website. The change applies to all customers.</p>
+<div id="loginBox">
+<input id="email" type="email" placeholder="Admin email">
+<input id="password" type="password" placeholder="Password">
+<button id="login" class="open">LOGIN</button>
+</div>
+<div id="controlBox" class="hidden">
+<div class="status">Current status: <span id="current">Loading...</span></div>
+<textarea id="message" rows="3" placeholder="Optional customer message, e.g. Online ordering reopens tomorrow at 12:30 PM."></textarea>
+<button class="open" onclick="setStatus('OPEN')">🟢 OPEN — Accept Orders</button>
+<button class="sold" onclick="setStatus('SOLD_OUT')">🥟 SOLD OUT — Stop Orders</button>
+<button class="closed" onclick="setStatus('CLOSED')">🔴 CLOSED — Stop Orders</button>
+<button class="logout" onclick="logout()">LOG OUT</button>
+</div>
+<p id="result" class="small"></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://ujkomlpfrfnfovwkyisu.supabase.co';
+const SUPABASE_KEY='sb_publishable_uBB24Zj6ih1QyKzkjt-V2g_ljk53064';
+const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const result=document.getElementById('result');
+async function refresh(){
+ const {data,error}=await client.from('store_status').select('status,message').eq('id',1).single();
+ if(error){result.textContent=error.message;result.className='small err';return;}
+ document.getElementById('current').textContent=data.status;
+ document.getElementById('message').value=data.message||'';
+}
+document.getElementById('login').onclick=async()=>{
+ result.textContent='Logging in...';
+ const {error}=await client.auth.signInWithPassword({email:document.getElementById('email').value,password:document.getElementById('password').value});
+ if(error){result.textContent=error.message;result.className='small err';return;}
+ document.getElementById('loginBox').classList.add('hidden');document.getElementById('controlBox').classList.remove('hidden');result.textContent='Logged in.';result.className='small ok';refresh();
+};
+window.setStatus=async(status)=>{
+ const {data:{user}}=await client.auth.getUser();
+ if(!user){result.textContent='Please log in.';return;}
+ const message=document.getElementById('message').value.trim()||null;
+ const {error}=await client.from('store_status').update({status,message,updated_at:new Date().toISOString()}).eq('id',1);
+ if(error){result.textContent=error.message;result.className='small err';return;}
+ result.textContent='Saved. Website is now '+status+'.';result.className='small ok';refresh();
+};
+window.logout=async()=>{await client.auth.signOut();location.reload();};
+client.auth.getSession().then(({data})=>{if(data.session){document.getElementById('loginBox').classList.add('hidden');document.getElementById('controlBox').classList.remove('hidden');refresh();}});
+</script>
+</body>
+</html>
