@@ -883,6 +883,67 @@ padding:7px 13px;
 
 }
 
+
+
+/* =========================
+   BUILD YOUR MOMO BOX
+========================= */
+.momo-builder{
+  margin-top:14px;
+  padding:14px;
+  border-radius:14px;
+  background:#fff8f2;
+  border:1px solid #f0dfd0;
+}
+.momo-builder .quantity-label{
+  font-weight:700;
+  margin-bottom:8px;
+}
+.momo-qty-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin:10px 0;
+}
+.momo-qty-btn{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:50%;
+  font-size:24px;
+  font-weight:700;
+  cursor:pointer;
+  background:#222;
+  color:#fff;
+}
+.momo-qty-number{
+  min-width:42px;
+  text-align:center;
+  font-size:22px;
+  font-weight:800;
+}
+.momo-live-price{
+  text-align:center;
+  font-size:22px;
+  font-weight:800;
+  margin:6px 0;
+}
+.momo-value-note{
+  text-align:center;
+  font-size:13px;
+  font-weight:600;
+  min-height:18px;
+}
+.menu-placeholder{
+  height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:82px;
+  background:#f7f1eb;
+}
+
 </style>
 
 </head>
@@ -1110,7 +1171,7 @@ Add To Cart
 
 <!-- 3 -->
 
-<div class="card">
+<div class="card momo-product" data-momo-type="paneer">
 
 <img
 src="images/Image_20260722_140402_356.webp"
@@ -1123,19 +1184,25 @@ Veg Steamed Paneer Momos
 </h3>
 
 <p class="pieces">
-🥟 12 Pieces
+🥟 Start with 6 Pieces
 </p>
 
-<p class="price">
-$12.00 CAD
-</p>
+<div class="momo-builder">
+<div class="quantity-label">Build Your Box</div>
+<div class="momo-qty-row">
+<button type="button" class="momo-qty-btn" onclick="changeMomoBuilder('paneer',-1)">−</button>
+<span id="momoQtyPaneer" class="momo-qty-number">6</span>
+<button type="button" class="momo-qty-btn" onclick="changeMomoBuilder('paneer',1)">+</button>
+</div>
+<div id="momoPricePaneer" class="momo-live-price">$8.00 CAD</div>
+<div id="momoNotePaneer" class="momo-value-note">Add more pieces — price updates automatically</div>
+</div>
 
 <button
+type="button"
 class="add-btn"
-onclick="addToCart('Veg Steamed Paneer Momos',12.00)">
-
-Add To Cart
-
+onclick="addBuiltMomo('Veg Steamed Paneer Momos','paneer')">
+Add Box To Cart
 </button>
 
 </div>
@@ -1145,7 +1212,7 @@ Add To Cart
 
 <!-- 4 -->
 
-<div class="card">
+<div class="card momo-product" data-momo-type="chilli">
 
 <img
 src="images/Image_20260726_112833_852.webp"
@@ -1158,19 +1225,25 @@ Chilli Cheese Corn Momo
 </h3>
 
 <p class="pieces">
-🥟 10 Pieces
+🥟 Start with 6 Pieces
 </p>
 
-<p class="price">
-$12.00 CAD
-</p>
+<div class="momo-builder">
+<div class="quantity-label">Build Your Box</div>
+<div class="momo-qty-row">
+<button type="button" class="momo-qty-btn" onclick="changeMomoBuilder('chilli',-1)">−</button>
+<span id="momoQtyChilli" class="momo-qty-number">6</span>
+<button type="button" class="momo-qty-btn" onclick="changeMomoBuilder('chilli',1)">+</button>
+</div>
+<div id="momoPriceChilli" class="momo-live-price">$8.00 CAD</div>
+<div id="momoNoteChilli" class="momo-value-note">Add more pieces — price updates automatically</div>
+</div>
 
 <button
+type="button"
 class="add-btn"
-onclick="addToCart('Chilli Cheese Corn Momo',12.00)">
-
-Add To Cart
-
+onclick="addBuiltMomo('Chilli Cheese Corn Momo','chilli')">
+Add Box To Cart
 </button>
 
 </div>
@@ -1180,7 +1253,7 @@ Add To Cart
 
 <!-- 5 -->
 
-<div class="card">
+<div class="card momo-product" data-momo-type="fried">
 
 <img
 src="images/Image_20260722_140401_990.webp"
@@ -1193,19 +1266,25 @@ Fried Momo
 </h3>
 
 <p class="pieces">
-🥟 10 Pieces
+🥟 Start with 6 Pieces
 </p>
 
-<p class="price">
-$12.00 CAD
-</p>
+<div class="momo-builder">
+<div class="quantity-label">Build Your Box</div>
+<div class="momo-qty-row">
+<button type="button" class="momo-qty-btn" onclick="changeMomoBuilder('fried',-1)">−</button>
+<span id="momoQtyFried" class="momo-qty-number">6</span>
+<button type="button" class="momo-qty-btn" onclick="changeMomoBuilder('fried',1)">+</button>
+</div>
+<div id="momoPriceFried" class="momo-live-price">$8.00 CAD</div>
+<div id="momoNoteFried" class="momo-value-note">Add more pieces — price updates automatically</div>
+</div>
 
 <button
+type="button"
 class="add-btn"
-onclick="addToCart('Veg Fried Momos',12.00)">
-
-Add To Cart
-
+onclick="addBuiltMomo('Veg Fried Momos','fried')">
+Add Box To Cart
 </button>
 
 </div>
@@ -1280,6 +1359,65 @@ Add To Cart
 
 </div>
 
+</div>
+
+
+<!-- NEW OPTIONS -->
+
+<div class="card">
+<div class="menu-placeholder" aria-label="Half and Half Momos">🥟</div>
+<div class="card-content">
+<h3>
+Half Fried + Half Veg Paneer Steamed
+</h3>
+<p class="pieces">
+🥟 10 Pieces (5 Fried + 5 Veg Paneer Steamed)
+</p>
+<p class="price">
+$12.00 CAD
+</p>
+<button type="button" class="add-btn" onclick="addToCart('Half Fried + Half Veg Paneer Steamed',12.00)">
+Add To Cart
+</button>
+</div>
+</div>
+
+
+<div class="card">
+<div class="menu-placeholder" aria-label="Masala Fries">🍟</div>
+<div class="card-content">
+<h3>
+Masala Fries
+</h3>
+<p class="pieces">
+🍟 Crispy Masala Fries
+</p>
+<p class="price">
+$6.00 CAD
+</p>
+<button type="button" class="add-btn" onclick="addToCart('Masala Fries',6.00)">
+Add To Cart
+</button>
+</div>
+</div>
+
+
+<div class="card">
+<div class="menu-placeholder" aria-label="Mini Coke">🥤</div>
+<div class="card-content">
+<h3>
+Mini Coke
+</h3>
+<p class="pieces">
+🥤 Mini Coke
+</p>
+<p class="price">
+$2.00 CAD
+</p>
+<button type="button" class="add-btn" onclick="addToCart('Mini Coke',2.00)">
+Add To Cart
+</button>
+</div>
 </div>
 
 
@@ -1600,6 +1738,116 @@ Fresh • Hot • Delicious
 
 let cart = [];
 
+updateMomoBuilder('paneer');
+updateMomoBuilder('chilli');
+updateMomoBuilder('fried');
+
+
+/* =========================
+   BUILD YOUR MOMO BOX PRICING
+========================= */
+
+const momoBuilderQty = {
+  paneer: 6,
+  chilli: 6,
+  fried: 6
+};
+
+function momoPrice(type, pieces){
+  pieces = Math.max(6, Math.min(50, Number(pieces) || 6));
+
+  // Preserve your current profitable anchor prices:
+  // Paneer: 12 pieces = $12
+  // Chilli/Fried: 10 pieces = $12
+  if(type === 'paneer'){
+    if(pieces <= 9) return 8 + (pieces - 6);
+    if(pieces === 10) return 11.50;
+    if(pieces === 11) return 12.00;
+    if(pieces === 12) return 12.00;
+    if(pieces <= 19) return 12 + (pieces - 12) * 0.90;
+    if(pieces <= 24) return 19.20 + (pieces - 20) * 0.90;
+    if(pieces <= 29) return 23.50 + (pieces - 25) * 0.90;
+    if(pieces <= 34) return 28.00 + (pieces - 30) * 0.85;
+    if(pieces <= 39) return 32.25 + (pieces - 35) * 0.75;
+    if(pieces <= 44) return 36.00 + (pieces - 40) * 0.72;
+    if(pieces <= 50) return 39.60 + (pieces - 45) * 0.68;
+  }
+
+  // Chilli Cheese and Fried share the same premium pricing structure.
+  if(pieces <= 10) return 8 + (pieces - 6);
+  if(pieces <= 19) return 12 + (pieces - 10);
+  if(pieces <= 24) return 22 + (pieces - 20) * 0.90;
+  if(pieces <= 29) return 26.40 + (pieces - 25) * 0.85;
+  if(pieces <= 34) return 30.60 + (pieces - 30) * 0.83;
+  if(pieces <= 39) return 34.75 + (pieces - 35) * 0.81;
+  if(pieces <= 44) return 38.80 + (pieces - 40) * 0.78;
+  return 42.70 + (pieces - 45) * 0.76;
+}
+
+function updateMomoBuilder(type){
+  const pieces = momoBuilderQty[type];
+  const price = momoPrice(type,pieces);
+  const label = type.charAt(0).toUpperCase() + type.slice(1);
+  const key = type.charAt(0).toUpperCase() + type.slice(1);
+
+  const qtyEl = document.getElementById('momoQty' + key);
+  const priceEl = document.getElementById('momoPrice' + key);
+  const noteEl = document.getElementById('momoNote' + key);
+
+  if(qtyEl) qtyEl.innerText = pieces;
+  if(priceEl) priceEl.innerText = '$' + price.toFixed(2) + ' CAD';
+
+  if(noteEl){
+    if(pieces === 6){
+      noteEl.innerText = 'Minimum order • Add pieces one at a time';
+    }else if(pieces === 12 && type === 'paneer'){
+      noteEl.innerText = '⭐ Your current 12-piece price';
+    }else if(pieces === 10 && type !== 'paneer'){
+      noteEl.innerText = '⭐ Your current 10-piece price';
+    }else if(pieces >= 30){
+      noteEl.innerText = '🔥 Party quantity • Best volume value';
+    }else if(pieces >= 20){
+      noteEl.innerText = '🎉 Quantity savings unlocked';
+    }else{
+      noteEl.innerText = 'Add more pieces — price updates automatically';
+    }
+  }
+}
+
+function changeMomoBuilder(type,delta){
+  const next = momoBuilderQty[type] + delta;
+  momoBuilderQty[type] = Math.max(6, Math.min(50,next));
+  updateMomoBuilder(type);
+}
+
+function addBuiltMomo(name,type){
+  const pieces = momoBuilderQty[type];
+  const price = momoPrice(type,pieces);
+
+  // Keep different box sizes as separate cart lines.
+  // Example: a 12-piece box and a 20-piece box remain separate.
+  let item = cart.find(x =>
+    x.name === name &&
+    x.momoType === type &&
+    x.pieces === pieces
+  );
+
+  if(item){
+    item.qty += 1;
+  }else{
+    cart.push({
+      name:name,
+      price:Number(price),
+      qty:1,
+      pieces:pieces,
+      momoType:type
+    });
+  }
+
+  updateCartCount();
+  showMessage(name + ' (' + pieces + ' pieces)');
+  updateCart();
+}
 
 /* =========================
    ADD TO CART
@@ -1714,11 +1962,16 @@ let total = 0;
 
 cart.forEach(function(item,index){
 
-let itemTotal =
-item.price * item.qty;
+let itemTotal = item.price * item.qty;
+
+if(item.momoType){
+  itemTotal = item.price * item.qty;
+}
 
 total += itemTotal;
 
+const displayPieces = item.momoType ? `<br>🥟 ${item.pieces * item.qty} pieces total` : '';
+const unitText = item.momoType ? `$${item.price.toFixed(2)} CAD per box` : `$${item.price.toFixed(2)} CAD each`;
 
 html += `
 
@@ -1726,38 +1979,32 @@ html += `
 
 <b>${item.name}</b>
 
+${displayPieces}
+
 <br>
 
-$${item.price.toFixed(2)} CAD each
+${unitText}
 
 <br><br>
 
 <button
 class="qty-btn"
 onclick="changeQty(${index},-1)">
-
 −
-
 </button>
 
-<strong>
-${item.qty}
-</strong>
+<strong>${item.qty}</strong>
 
 <button
 class="qty-btn"
 onclick="changeQty(${index},1)">
-
 +
-
 </button>
 
 <button
 class="remove-btn"
 onclick="removeItem(${index})">
-
 Remove
-
 </button>
 
 <br><br>
@@ -1791,16 +2038,19 @@ function changeQty(index,value){
 
 if(!cart[index]) return;
 
-cart[index].qty += value;
-
-if(cart[index].qty <= 0){
-
-cart.splice(index,1);
-
+if(cart[index].momoType){
+  cart[index].qty += value;
+  if(cart[index].qty <= 0){
+    cart.splice(index,1);
+  }
+}else{
+  cart[index].qty += value;
+  if(cart[index].qty <= 0){
+    cart.splice(index,1);
+  }
 }
 
 updateCartCount();
-
 updateCart();
 
 }
@@ -2583,35 +2833,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /* =====================================================
-   MR'S MOMOS — SOLD OUT TODAY + CLOSED TOMORROW
-   SOLD OUT: SEPTEMBER 7, 2026
-   CLOSED: SEPTEMBER 8, 2026
-   NORMAL ORDERS RETURN: SEPTEMBER 9, 2026
+   MR'S MOMOS — CLOSED TOMORROW
+   CLOSED: SEPTEMBER 9, 2026
+   NORMAL ORDERS RETURN: SEPTEMBER 10, 2026
 ===================================================== */
 
 (function () {
 
     const now = new Date();
 
-    const isSoldOutToday =
-        now.getFullYear() === 2026 &&
-        now.getMonth() === 8 &&
-        now.getDate() === 7;
-
     const isClosedTomorrow =
         now.getFullYear() === 2026 &&
         now.getMonth() === 8 &&
-        now.getDate() === 8;
+        now.getDate() === 9;
 
-    if (!isSoldOutToday && !isClosedTomorrow) return;
+    if (!isClosedTomorrow) return;
 
-    const message = isSoldOutToday
-        ? "🥟 <strong>SOLD OUT TODAY</strong> — Thank you for your support! ❤️"
-        : "🔴 <strong>MR's Momos is CLOSED TODAY</strong> — Online ordering reopens September 9 ❤️";
+    const message =
+        "🔴 <strong>MR's Momos is CLOSED TOMORROW</strong> — Online ordering reopens September 10 ❤️";
 
-    const alertMessage = isSoldOutToday
-        ? "🥟 Sorry, MR's Momos is SOLD OUT today!\n\nThank you for your support. ❤️"
-        : "🔴 MR's Momos is CLOSED today.\n\nOnline ordering will reopen September 9. ❤️";
+    const alertMessage =
+        "🔴 MR's Momos is CLOSED tomorrow (September 9).
+
+Online ordering will reopen September 10. ❤️";
 
     const banner = document.createElement("div");
     banner.innerHTML = message;
@@ -2640,7 +2884,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* Disable all Add To Cart buttons */
     document.querySelectorAll(".add-btn").forEach(function(button) {
         button.disabled = true;
-        button.innerText = isSoldOutToday ? "🔴 SOLD OUT" : "🔴 CLOSED TODAY";
+        button.innerText = "🔴 CLOSED TOMORROW";
         button.style.opacity = "0.5";
         button.style.cursor = "not-allowed";
         button.onclick = function(event) {
@@ -2654,9 +2898,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* Disable WhatsApp */
     document.querySelectorAll(".whatsapp").forEach(function(button) {
         button.disabled = true;
-        button.innerText = isSoldOutToday
-            ? "🔴 SOLD OUT — No More Orders"
-            : "🔴 Orders Closed Today";
+        button.innerText = "🔴 Orders Closed Tomorrow";
         button.style.opacity = "0.5";
         button.style.cursor = "not-allowed";
         button.onclick = function(event) {
@@ -2692,7 +2934,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "#checkoutBtn, .checkout-btn, button[type='submit'], #squarePayBtn"
     ).forEach(function(button) {
         button.disabled = true;
-        button.innerText = isSoldOutToday ? "🔴 SOLD OUT" : "🔴 CLOSED TODAY";
+        button.innerText = "🔴 CLOSED TOMORROW";
         button.style.opacity = "0.5";
         button.style.cursor = "not-allowed";
     });
