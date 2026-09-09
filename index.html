@@ -1374,9 +1374,47 @@ Half Fried + Half Veg Paneer Steamed
 🥟 10 Pieces (5 Fried + 5 Veg Paneer Steamed)
 </p>
 <p class="price">
-coming soon..
+$12.00 CAD
 </p>
 <button type="button" class="add-btn" onclick="addToCart('Half Fried + Half Veg Paneer Steamed',12.00)">
+Add To Cart
+</button>
+</div>
+</div>
+
+
+<div class="card">
+<div class="menu-placeholder" aria-label="Masala Fries">🍟</div>
+<div class="card-content">
+<h3>
+Masala Fries
+</h3>
+<p class="pieces">
+🍟 Crispy Masala Fries
+</p>
+<p class="price">
+$6.00 CAD
+</p>
+<button type="button" class="add-btn" onclick="addToCart('Masala Fries',6.00)">
+Add To Cart
+</button>
+</div>
+</div>
+
+
+<div class="card">
+<div class="menu-placeholder" aria-label="Mini Coke">🥤</div>
+<div class="card-content">
+<h3>
+Mini Coke
+</h3>
+<p class="pieces">
+🥤 Mini Coke
+</p>
+<p class="price">
+$2.00 CAD
+</p>
+<button type="button" class="add-btn" onclick="addToCart('Mini Coke',2.00)">
 Add To Cart
 </button>
 </div>
@@ -1433,12 +1471,12 @@ Noodles
 </h3>
 
 <p class="price">
-$15.00 CAD
+$12.00 CAD
 </p>
 
 <button
 class="add-btn"
-onclick="addToCart('Noodles',15.00)">
+onclick="addToCart('Noodles',12.00)">
 
 Add To Cart
 
@@ -1448,42 +1486,6 @@ Add To Cart
 
 </div>
 
-<div class="card">
-<div class="menu-placeholder" aria-label="Masala Fries">🍟</div>
-<div class="card-content">
-<h3>
-Masala Fries
-</h3>
-<p class="pieces">
-🍟 Crispy Masala Fries
-</p>
-<p class="price">
-coming Soon..!
-</p>
-<button type="button" class="add-btn" onclick="addToCart('Masala Fries',6.50)">
-Add To Cart
-</button>
-</div>
-</div>
-
-
-<div class="card">
-<div class="menu-placeholder" aria-label="Mini Coke">🥤</div>
-<div class="card-content">
-<h3>
-Mini Coke
-</h3>
-<p class="pieces">
-🥤 Mini Coke
-</p>
-<p class="price">
-$1.50 CAD
-</p>
-<button type="button" class="add-btn" onclick="addToCart('Mini Coke',1.50)">
-Add To Cart
-</button>
-</div>
-</div>
 
 <!-- 10 -->
 
@@ -2561,386 +2563,98 @@ now.getMinutes() + 15
 generatePickupTimes();
 
 
-/* =====================================================
-   MR'S MOMOS — CLOSED SEPTEMBER 5, 2026
-   Automatically reopens September 6, 2026
-===================================================== */
 
-(function () {
 
-    const now = new Date();
-
-    const closedToday =
-        now.getFullYear() === 2026 &&
-        now.getMonth() === 8 &&   // September = 8
-        now.getDate() === 5;
-
-    if (!closedToday) return;
-
-
-    /* CLOSED BANNER */
-
-    const banner = document.createElement("div");
-
-    banner.innerHTML = `
-        🔴 <strong>MR's Momos is CLOSED today</strong>
-        — Online ordering reopens tomorrow ❤️
-    `;
-
-    banner.style.cssText = `
-        background:#c1121f;
-        color:white;
-        text-align:center;
-        padding:14px 12px;
-        font-size:17px;
-        font-weight:600;
-        position:relative;
-        z-index:99999;
-    `;
-
-    document.body.insertBefore(banner, document.body.firstChild);
-
-
-    /* DISABLE ALL MENU / ORDER-NOW LINKS */
-
-    document.querySelectorAll('a[href="#menu"]').forEach(function (button) {
-
-        button.textContent = "🔴 CLOSED TODAY";
-        button.style.pointerEvents = "none";
-        button.style.opacity = "0.55";
-
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        });
-
-    });
-
-
-    /* DISABLE ALL ADD-TO-CART BUTTONS */
-
-    document.querySelectorAll(".add-btn").forEach(function (button) {
-
-        button.disabled = true;
-        button.textContent = "🔴 CLOSED TODAY";
-        button.style.opacity = "0.5";
-        button.style.cursor = "not-allowed";
-
-    });
-
-
-    /* DISABLE WHATSAPP ORDER BUTTON */
-
-    document.querySelectorAll(".whatsapp").forEach(function (button) {
-
-        button.disabled = true;
-        button.textContent = "🔴 Orders Closed Today";
-        button.style.opacity = "0.5";
-        button.style.cursor = "not-allowed";
-
-        button.onclick = function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            alert(
-                "🔴 MR's Momos is CLOSED today.\n\n" +
-                "Online ordering will reopen tomorrow. ❤️"
-            );
-
-            return false;
-        };
-
-    });
-
-
-    /* DISABLE PAYMENT */
-
-    const payment = document.getElementById("payment");
-
-    if (payment) {
-        payment.disabled = true;
-    }
-
-
-    /* DISABLE PICKUP TIME */
-
-    const pickupTime = document.getElementById("pickupTime");
-
-    if (pickupTime) {
-        pickupTime.disabled = true;
-    }
-
-
-    /* DISABLE CART BUTTON */
-
-    const cartButton = document.querySelector(".cart-count");
-
-    if (cartButton) {
-
-        cartButton.style.opacity = "0.5";
-        cartButton.style.cursor = "not-allowed";
-
-        cartButton.onclick = function (event) {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            alert(
-                "🔴 Ordering is closed today.\n\n" +
-                "Online ordering will reopen tomorrow. ❤️"
-            );
-
-            return false;
-        };
-    }
-
-
-    /* DISABLE SQUARE BUTTON IF PRESENT */
-
-    const squareButton = document.getElementById("squarePayBtn");
-
-    if (squareButton) {
-        squareButton.disabled = true;
-        squareButton.textContent = "🔴 CLOSED TODAY";
-        squareButton.style.opacity = "0.5";
-    }
-
-
-    /* DISABLE ANY SUBMIT / CHECKOUT BUTTON */
-
-    document.querySelectorAll(
-        '#checkoutBtn, .checkout-btn, button[type="submit"]'
-    ).forEach(function (button) {
-
-        button.disabled = true;
-        button.style.opacity = "0.5";
-        button.style.cursor = "not-allowed";
-
-    });
-
-})();
-
-
-/* =========================
-   MR'S MOMOS — CLOSED TOMORROW
-   SEPTEMBER 8, 2026
-   Automatically reopens September 9, 2026
-========================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const today = new Date();
-
-    const soldOutToday =
-        today.getFullYear() === 2026 &&
-        today.getMonth() === 8 &&
-        today.getDate() === 8;
-
-    if (!soldOutToday) return;
-
-
-    /* SOLD OUT BANNER */
-
-    const banner = document.createElement("div");
-
-    banner.innerHTML =
-        "🥟 <strong>CLOSED TODAY</strong> — " +
-        "Thank you for your support! ❤️";
-
-    banner.style.background = "#c1121f";
-    banner.style.color = "white";
-    banner.style.textAlign = "center";
-    banner.style.padding = "14px";
-    banner.style.fontSize = "18px";
-    banner.style.fontWeight = "600";
-
-    document.body.insertBefore(
-        banner,
-        document.body.firstChild
-    );
-
-
-    /* DISABLE ALL ADD TO CART */
-
-    document.querySelectorAll(".add-btn").forEach(function(button) {
-
-        button.disabled = true;
-
-        button.innerText = "🔴 CLOSED";
-
-        button.style.opacity = "0.5";
-
-        button.style.cursor = "not-allowed";
-
-        button.onclick = function(event) {
-
-            event.preventDefault();
-
-            alert(
-                "🥟 Sorry, we're CLOSED today!\n\n" +
-                "Thank you for your support. ❤️"
-            );
-
-            return false;
-        };
-
-    });
-
-
-    /* DISABLE WHATSAPP ORDER */
-
-    const whatsappButton =
-        document.querySelector(".whatsapp");
-
-    if (whatsappButton) {
-
-        whatsappButton.disabled = true;
-
-        whatsappButton.innerText =
-            "🔴 CLOSED — No More Orders";
-
-        whatsappButton.style.opacity = "0.5";
-
-        whatsappButton.onclick = function(event) {
-
-            event.preventDefault();
-
-            alert(
-                "🥟 Sorry, MR's Momos is CLOSED today!\n\n" +
-                "Please come back tomorrow. ❤️"
-            );
-
-            return false;
-        };
-
-    }
-
-
-    /* DISABLE PAYMENT */
-
-    const payment =
-        document.getElementById("payment");
-
-    if (payment) {
-
-        payment.disabled = true;
-
-    }
-
-});
-
-
-/* =====================================================
-   MR'S MOMOS — CLOSED TOMORROW
-   CLOSED: SEPTEMBER 9, 2026
-   NORMAL ORDERS RETURN: SEPTEMBER 10, 2026
-===================================================== */
-
-(function () {
-
-    const now = new Date();
-
-    const isClosedTomorrow =
-        now.getFullYear() === 2026 &&
-        now.getMonth() === 8 &&
-        now.getDate() === 9;
-
-    if (!isClosedTomorrow) return;
-
-    const message =
-        "🔴 <strong>MR's Momos is CLOSED TOMORROW</strong> — Online ordering reopens September 10 ❤️";
-
-    const alertMessage =
-        "🔴 MR's Momos is CLOSED tomorrow (September 9).
-
-Online ordering will reopen September 10. ❤️";
-
-    const banner = document.createElement("div");
-    banner.innerHTML = message;
-    banner.style.cssText = `
-        background:#c1121f;
-        color:white;
-        text-align:center;
-        padding:14px 12px;
-        font-size:18px;
-        font-weight:600;
-        position:relative;
-        z-index:99999;
-    `;
-    document.body.insertBefore(banner, document.body.firstChild);
-
-    /* Disable ordering/menu buttons */
-    document.querySelectorAll('a[href="#menu"], .order-btn').forEach(function(button) {
-        button.style.pointerEvents = "none";
-        button.style.opacity = "0.55";
-        button.addEventListener("click", function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-        });
-    });
-
-    /* Disable all Add To Cart buttons */
-    document.querySelectorAll(".add-btn").forEach(function(button) {
-        button.disabled = true;
-        button.innerText = "🔴 CLOSED TOMORROW";
-        button.style.opacity = "0.5";
-        button.style.cursor = "not-allowed";
-        button.onclick = function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            alert(alertMessage);
-            return false;
-        };
-    });
-
-    /* Disable WhatsApp */
-    document.querySelectorAll(".whatsapp").forEach(function(button) {
-        button.disabled = true;
-        button.innerText = "🔴 Orders Closed Tomorrow";
-        button.style.opacity = "0.5";
-        button.style.cursor = "not-allowed";
-        button.onclick = function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            alert(alertMessage);
-            return false;
-        };
-    });
-
-    /* Disable payment and pickup */
-    const payment = document.getElementById("payment");
-    if (payment) payment.disabled = true;
-
-    const pickupTime = document.getElementById("pickupTime");
-    if (pickupTime) pickupTime.disabled = true;
-
-    /* Disable cart */
-    const cartButton = document.querySelector(".cart-count");
-    if (cartButton) {
-        cartButton.style.opacity = "0.5";
-        cartButton.style.cursor = "not-allowed";
-        cartButton.onclick = function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            alert(alertMessage);
-            return false;
-        };
-    }
-
-    /* Disable checkout / submit */
-    document.querySelectorAll(
-        "#checkoutBtn, .checkout-btn, button[type='submit'], #squarePayBtn"
-    ).forEach(function(button) {
-        button.disabled = true;
-        button.innerText = "🔴 CLOSED TOMORROW";
-        button.style.opacity = "0.5";
-        button.style.cursor = "not-allowed";
-    });
-
-})();
-
+// Remote store status is handled by Supabase below.
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function () {
+  const SUPABASE_URL = "https://ujkomlpfrfnfovwkyisu.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_uBB24Zj6ih1QyKzkjt-V2g_ljk53064";
+
+  function disableOrdering(status, message) {
+    const isSoldOut = status === "SOLD_OUT";
+    const title = isSoldOut ? "🥟 SOLD OUT TODAY" : "🔴 MR's Momos is CLOSED";
+    const buttonText = isSoldOut ? "🔴 SOLD OUT" : "🔴 CLOSED";
+    const whatsappText = isSoldOut ? "🔴 SOLD OUT — No More Orders" : "🔴 Orders Closed";
+    const defaultMessage = isSoldOut
+      ? "🥟 Sorry, we're SOLD OUT today!\n\nThank you for your support. ❤️"
+      : "🔴 Sorry, MR's Momos is CLOSED right now.\n\nPlease check back later. ❤️";
+    const alertText = message || defaultMessage;
+
+    document.querySelectorAll('[data-mr-status-banner]').forEach(el => el.remove());
+    const banner = document.createElement('div');
+    banner.setAttribute('data-mr-status-banner', '1');
+    banner.innerHTML = '<strong>' + title + '</strong>' + (message ? ' — ' + message : '');
+    banner.style.cssText = 'background:#c1121f;color:#fff;text-align:center;padding:14px 12px;font-size:18px;font-weight:600;position:relative;z-index:99999;';
+    document.body.insertBefore(banner, document.body.firstChild);
+
+    document.querySelectorAll('a[href="#menu"], .order-btn').forEach(button => {
+      button.style.pointerEvents = 'none';
+      button.style.opacity = '0.55';
+      button.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); });
+    });
+
+    document.querySelectorAll('.add-btn').forEach(button => {
+      button.disabled = true;
+      button.textContent = buttonText;
+      button.style.opacity = '0.5';
+      button.style.cursor = 'not-allowed';
+      button.onclick = function (e) {
+        e.preventDefault(); e.stopPropagation(); alert(alertText); return false;
+      };
+    });
+
+    document.querySelectorAll('.whatsapp').forEach(button => {
+      button.disabled = true;
+      button.textContent = whatsappText;
+      button.style.opacity = '0.5';
+      button.style.cursor = 'not-allowed';
+      button.onclick = function (e) {
+        e.preventDefault(); e.stopPropagation(); alert(alertText); return false;
+      };
+    });
+
+    ['payment','pickupTime'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.disabled = true;
+    });
+
+    document.querySelectorAll('.cart-count, #checkoutBtn, .checkout-btn, button[type="submit"], #squarePayBtn').forEach(button => {
+      button.style.opacity = '0.5';
+      button.style.cursor = 'not-allowed';
+      if ('disabled' in button) button.disabled = true;
+      button.onclick = function (e) {
+        e.preventDefault(); e.stopPropagation(); alert(alertText); return false;
+      };
+    });
+  }
+
+  async function loadStoreStatus() {
+    try {
+      const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      const { data, error } = await client
+        .from('store_status')
+        .select('status,message')
+        .eq('id', 1)
+        .single();
+      if (error) throw error;
+      if (data && data.status !== 'OPEN') disableOrdering(data.status, data.message || '');
+    } catch (err) {
+      console.warn("MR's Momos store status could not be loaded.", err);
+      // Fail open: the normal website remains usable if the status service is unavailable.
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadStoreStatus);
+  } else {
+    loadStoreStatus();
+  }
+})();
+</script>
 </body>
 
 </html>
