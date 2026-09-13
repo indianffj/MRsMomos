@@ -1,60 +1,861 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MR's Momos — Store Control</title>
-<style>
-body{font-family:Arial,sans-serif;background:#f5f5f5;margin:0;padding:30px;color:#222}.box{max-width:520px;margin:auto;background:#fff;padding:28px;border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,.1)}h1{margin-top:0}input,button,textarea{width:100%;box-sizing:border-box;padding:13px;margin:7px 0;border-radius:10px;border:1px solid #ccc;font-size:16px}button{border:0;cursor:pointer;font-weight:700}.open{background:#198754;color:#fff}.sold{background:#dc3545;color:#fff}.closed{background:#343a40;color:#fff}.logout{background:#eee}.hidden{display:none}.status{padding:15px;border-radius:12px;background:#f1f1f1;margin:15px 0;font-weight:700}.small{font-size:13px;color:#666}.ok{color:#198754}.err{color:#c1121f}</style>
-</head>
-<body>
-<div class="box">
-<h1>🥟 MR's Momos</h1>
-<p><strong>Store Control</strong></p>
-<p class="small">Use this page to instantly OPEN, mark SOLD OUT, or CLOSE the website. The change applies to all customers.</p>
-<div id="loginBox">
-<input id="email" type="email" placeholder="Admin email">
-<input id="password" type="password" placeholder="Password">
-<button id="login" class="open">LOGIN</button>
-</div>
-<div id="controlBox" class="hidden">
-<div class="status">Current status: <span id="current">Loading...</span></div>
-<textarea id="message" rows="3" placeholder="Optional customer message, e.g. Online ordering reopens tomorrow at 12:30 PM."></textarea>
-<button class="open" onclick="setStatus('OPEN')">🟢 OPEN — Accept Orders</button>
-<button class="sold" onclick="setStatus('SOLD_OUT')">🥟 SOLD OUT — Stop Orders</button>
-<button class="closed" onclick="setStatus('CLOSED')">🔴 CLOSED — Stop Orders</button>
-<button class="logout" onclick="logout()">LOG OUT</button>
-</div>
-<p id="result" class="small"></p>
-</div>
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>MR's Momos — Admin Control</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL='https://ujkomlpfrfnfovwkyisu.supabase.co';
-const SUPABASE_KEY='sb_publishable_uBB24Zj6ih1QyKzkjt-V2g_ljk53064';
-const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const result=document.getElementById('result');
-async function refresh(){
- const {data,error}=await client.from('store_status').select('status,message').eq('id',1).single();
- if(error){result.textContent=error.message;result.className='small err';return;}
- document.getElementById('current').textContent=data.status;
- document.getElementById('message').value=data.message||'';
+
+<style>
+
+*{
+box-sizing:border-box;
 }
-document.getElementById('login').onclick=async()=>{
- result.textContent='Logging in...';
- const {error}=await client.auth.signInWithPassword({email:document.getElementById('email').value,password:document.getElementById('password').value});
- if(error){result.textContent=error.message;result.className='small err';return;}
- document.getElementById('loginBox').classList.add('hidden');document.getElementById('controlBox').classList.remove('hidden');result.textContent='Logged in.';result.className='small ok';refresh();
-};
-window.setStatus=async(status)=>{
- const {data:{user}}=await client.auth.getUser();
- if(!user){result.textContent='Please log in.';return;}
- const message=document.getElementById('message').value.trim()||null;
- const {error}=await client.from('store_status').update({status,message,updated_at:new Date().toISOString()}).eq('id',1);
- if(error){result.textContent=error.message;result.className='small err';return;}
- result.textContent='Saved. Website is now '+status+'.';result.className='small ok';refresh();
-};
-window.logout=async()=>{await client.auth.signOut();location.reload();};
-client.auth.getSession().then(({data})=>{if(data.session){document.getElementById('loginBox').classList.add('hidden');document.getElementById('controlBox').classList.remove('hidden');refresh();}});
+
+body{
+
+margin:0;
+
+font-family:Arial,sans-serif;
+
+background:#fff8f0;
+
+color:#222;
+
+padding:20px;
+
+}
+
+.container{
+
+max-width:600px;
+
+margin:auto;
+
+}
+
+h1{
+
+text-align:center;
+
+color:#c1121f;
+
+}
+
+.card{
+
+background:white;
+
+padding:20px;
+
+border-radius:18px;
+
+margin-bottom:18px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+input,textarea{
+
+width:100%;
+
+padding:13px;
+
+margin:7px 0;
+
+border:1px solid #ddd;
+
+border-radius:10px;
+
+font-size:16px;
+
+}
+
+button{
+
+width:100%;
+
+border:0;
+
+border-radius:12px;
+
+padding:14px;
+
+margin:6px 0;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.login{
+
+background:#4285F4;
+
+color:white;
+
+}
+
+.open{
+
+background:#198754;
+
+color:white;
+
+}
+
+.closed{
+
+background:#343a40;
+
+color:white;
+
+}
+
+.all-sold{
+
+background:#c1121f;
+
+color:white;
+
+}
+
+.logout{
+
+background:#eee;
+
+}
+
+.item{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:14px 0;
+
+border-bottom:1px solid #eee;
+
+gap:10px;
+
+}
+
+.item:last-child{
+
+border-bottom:0;
+
+}
+
+.item-name{
+
+font-weight:bold;
+
+flex:1;
+
+}
+
+.item-status{
+
+font-size:13px;
+
+margin-top:4px;
+
+}
+
+.available{
+
+color:#198754;
+
+}
+
+.sold{
+
+color:#c1121f;
+
+}
+
+.switch{
+
+width:90px;
+
+padding:10px;
+
+margin:0;
+
+color:white;
+
+}
+
+.switch.available-btn{
+
+background:#198754;
+
+}
+
+.switch.sold-btn{
+
+background:#c1121f;
+
+}
+
+#controlBox{
+
+display:none;
+
+}
+
+#message{
+
+min-height:80px;
+
+}
+
+#result{
+
+text-align:center;
+
+font-weight:bold;
+
+padding:10px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>🥟 MR's MOMOS</h1>
+
+<div class="card" id="loginBox">
+
+<h2>🔐 Admin Login</h2>
+
+<input
+id="email"
+type="email"
+placeholder="Admin Email">
+
+<input
+id="password"
+type="password"
+placeholder="Password">
+
+<button
+class="login"
+onclick="login()">
+
+LOGIN
+
+</button>
+
+</div>
+
+
+<div id="controlBox">
+
+
+<div class="card">
+
+<h2>🏪 Store Control</h2>
+
+<textarea
+id="storeMessage"
+placeholder="Optional customer message"></textarea>
+
+
+<button
+class="open"
+onclick="setStore('OPEN')">
+
+🟢 OPEN — ACCEPT ORDERS
+
+</button>
+
+
+<button
+class="all-sold"
+onclick="setStore('SOLD_OUT')">
+
+🥟 SOLD OUT — ALL ORDERS
+
+</button>
+
+
+<button
+class="closed"
+onclick="setStore('CLOSED')">
+
+🔴 CLOSED
+
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>🍽️ Individual Menu Control</h2>
+
+<p>
+Turn individual items on/off without closing your whole store.
+</p>
+
+
+<div class="item">
+
+<div class="item-name">
+
+🥟 Paneer Steamed Momos
+
+<div
+id="status-paneer"
+class="item-status">
+
+Loading...
+
+</div>
+
+</div>
+
+<button
+id="btn-paneer"
+class="switch"
+onclick="toggleItem('paneer')">
+
+Loading
+
+</button>
+
+</div>
+
+
+
+<div class="item">
+
+<div class="item-name">
+
+🌶️ Chilli Cheese Momos
+
+<div
+id="status-chilli"
+class="item-status">
+
+Loading...
+
+</div>
+
+</div>
+
+<button
+id="btn-chilli"
+class="switch"
+onclick="toggleItem('chilli')">
+
+Loading
+
+</button>
+
+</div>
+
+
+
+<div class="item">
+
+<div class="item-name">
+
+🍗 Fried Momos
+
+<div
+id="status-fried"
+class="item-status">
+
+Loading...
+
+</div>
+
+</div>
+
+<button
+id="btn-fried"
+class="switch"
+onclick="toggleItem('fried')">
+
+Loading
+
+</button>
+
+</div>
+
+
+
+<div class="item">
+
+<div class="item-name">
+
+🥟 Half & Half
+
+<div
+id="status-halfhalf"
+class="item-status">
+
+Loading...
+
+</div>
+
+</div>
+
+<button
+id="btn-halfhalf"
+class="switch"
+onclick="toggleItem('halfhalf')">
+
+Loading
+
+</button>
+
+</div>
+
+
+
+<div class="item">
+
+<div class="item-name">
+
+🍟 Masala Fries
+
+<div
+id="status-fries"
+class="item-status">
+
+Loading...
+
+</div>
+
+</div>
+
+<button
+id="btn-fries"
+class="switch"
+onclick="toggleItem('fries')">
+
+Loading
+
+</button>
+
+</div>
+
+
+
+<div class="item">
+
+<div class="item-name">
+
+🥤 Mini Coke
+
+<div
+id="status-coke"
+class="item-status">
+
+Loading...
+
+</div>
+
+</div>
+
+<button
+id="btn-coke"
+class="switch"
+onclick="toggleItem('coke')">
+
+Loading
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<div class="card">
+
+<button
+class="logout"
+onclick="logout()">
+
+LOG OUT
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<div id="result"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+const SUPABASE_URL =
+"https://ujkomlpfrfnfovwkyisu.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_uBB24Zj6ih1QyKzkjt-V2g_ljk53064";
+
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+
+function result(message,good=false){
+
+const box =
+document.getElementById("result");
+
+box.innerText =
+message;
+
+box.style.color =
+good ? "#198754" : "#c1121f";
+
+}
+
+
+
+/* LOGIN */
+
+async function login(){
+
+const email =
+document.getElementById("email")
+.value.trim();
+
+const password =
+document.getElementById("password")
+.value;
+
+
+if(!email || !password){
+
+result("Enter email and password.");
+
+return;
+
+}
+
+
+result("Logging in...",true);
+
+
+const {data,error} =
+await supabaseClient.auth
+.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+
+if(error){
+
+result(error.message);
+
+return;
+
+}
+
+
+document.getElementById("loginBox")
+.style.display="none";
+
+
+document.getElementById("controlBox")
+.style.display="block";
+
+
+result("✅ Logged in",true);
+
+
+loadMenu();
+
+}
+
+
+
+/* LOAD MENU */
+
+async function loadMenu(){
+
+const {data,error} =
+await supabaseClient
+.from("menu_status")
+.select("*");
+
+
+if(error){
+
+result(error.message);
+
+return;
+
+}
+
+
+data.forEach(function(item){
+
+updateButton(
+item.item_key,
+item.available
+);
+
+});
+
+}
+
+
+
+/* UPDATE BUTTON */
+
+function updateButton(key,available){
+
+const button =
+document.getElementById(
+"btn-"+key
+);
+
+const status =
+document.getElementById(
+"status-"+key
+);
+
+
+if(!button || !status) return;
+
+
+if(available){
+
+button.innerText =
+"🟢 AVAILABLE";
+
+button.className =
+"switch available-btn";
+
+status.innerText =
+"🟢 Available";
+
+status.className =
+"item-status available";
+
+}else{
+
+button.innerText =
+"🔴 SOLD OUT";
+
+button.className =
+"switch sold-btn";
+
+status.innerText =
+"🔴 SOLD OUT";
+
+status.className =
+"item-status sold";
+
+}
+
+}
+
+
+
+/* TOGGLE ITEM */
+
+async function toggleItem(key){
+
+const {data,error} =
+await supabaseClient
+.from("menu_status")
+.select("available")
+.eq("item_key",key)
+.single();
+
+
+if(error){
+
+result(error.message);
+
+return;
+
+}
+
+
+const newStatus =
+!data.available;
+
+
+const {error:updateError} =
+await supabaseClient
+.from("menu_status")
+.update({
+
+available:newStatus,
+
+updated_at:
+new Date().toISOString()
+
+})
+.eq("item_key",key);
+
+
+if(updateError){
+
+result(updateError.message);
+
+return;
+
+}
+
+
+updateButton(
+key,
+newStatus
+);
+
+
+result(
+
+newStatus
+? "🟢 Item available"
+: "🔴 Item marked SOLD OUT",
+
+true
+
+);
+
+}
+
+
+
+/* STORE */
+
+async function setStore(status){
+
+const message =
+document.getElementById(
+"storeMessage"
+).value.trim();
+
+
+const {error} =
+await supabaseClient
+.from("store_status")
+.update({
+
+status:status,
+
+message:message || null,
+
+updated_at:
+new Date().toISOString()
+
+})
+.eq("id",1);
+
+
+if(error){
+
+result(error.message);
+
+return;
+
+}
+
+
+result(
+
+status === "OPEN"
+? "🟢 Store is OPEN"
+: status === "SOLD_OUT"
+? "🥟 ALL ITEMS SOLD OUT"
+: "🔴 Store CLOSED",
+
+true
+
+);
+
+}
+
+
+
+/* LOGOUT */
+
+async function logout(){
+
+await supabaseClient.auth.signOut();
+
+location.reload();
+
+}
+
+
+
+/* AUTO LOGIN */
+
+supabaseClient.auth
+.getSession()
+.then(function(response){
+
+if(response.data.session){
+
+document.getElementById(
+"loginBox"
+).style.display="none";
+
+document.getElementById(
+"controlBox"
+).style.display="block";
+
+loadMenu();
+
+}
+
+});
+
 </script>
+
+
 </body>
+
 </html>
