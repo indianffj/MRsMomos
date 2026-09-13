@@ -2971,7 +2971,242 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 </script>
+<!-- ==========================================
+     MR'S MOMOS — INDIVIDUAL MENU STATUS
+========================================== -->
 
+<script>
+
+(function(){
+
+const SUPABASE_URL =
+"https://ujkomlpfrfnfovwkyisu.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_uBB24Zj6ih1QyKzkjt-V2g_ljk53064";
+
+const client =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+
+async function loadMenuAvailability(){
+
+const {data,error} =
+await client
+.from("menu_status")
+.select("*");
+
+
+if(error){
+
+console.error(
+"MENU STATUS ERROR:",
+error
+);
+
+return;
+
+}
+
+
+data.forEach(function(item){
+
+applyMenuStatus(
+item.item_key,
+item.available
+);
+
+});
+
+}
+
+
+
+function applyMenuStatus(key,available){
+
+/*
+   Find buttons using the existing
+   Add To Cart button.
+*/
+
+const buttons =
+document.querySelectorAll(
+".add-btn"
+);
+
+
+buttons.forEach(function(button){
+
+const card =
+button.closest(
+".menu-card, .card, .menu-item, article"
+);
+
+
+if(!card) return;
+
+
+const text =
+card.innerText.toLowerCase();
+
+
+let match=false;
+
+
+/* PANEER */
+
+if(
+key==="paneer" &&
+(
+text.includes("paneer") ||
+text.includes("veg steamed")
+)
+){
+
+match=true;
+
+}
+
+
+/* CHILLI */
+
+if(
+key==="chilli" &&
+text.includes("chilli cheese")
+){
+
+match=true;
+
+}
+
+
+/* FRIED */
+
+if(
+key==="fried" &&
+text.includes("fried momo")
+){
+
+match=true;
+
+}
+
+
+/* HALF HALF */
+
+if(
+key==="halfhalf" &&
+text.includes("half")
+){
+
+match=true;
+
+}
+
+
+/* FRIES */
+
+if(
+key==="fries" &&
+text.includes("masala fries")
+){
+
+match=true;
+
+}
+
+
+/* COKE */
+
+if(
+key==="coke" &&
+text.includes("mini coke")
+){
+
+match=true;
+
+}
+
+
+if(!match) return;
+
+
+if(!available){
+
+button.disabled=true;
+
+button.innerText=
+"🔴 SOLD OUT";
+
+button.style.opacity="0.55";
+
+button.style.cursor=
+"not-allowed";
+
+
+button.onclick=function(e){
+
+e.preventDefault();
+
+e.stopPropagation();
+
+alert(
+"🔴 Sorry, this item is SOLD OUT."
+);
+
+return false;
+
+};
+
+
+}else{
+
+button.disabled=false;
+
+button.innerText=
+"Add To Cart";
+
+button.style.opacity="1";
+
+button.style.cursor=
+"pointer";
+
+}
+
+});
+
+}
+
+
+
+/*
+Run after page loads so your existing
+Add To Cart code is not replaced.
+*/
+
+if(
+document.readyState ===
+"loading"
+){
+
+document.addEventListener(
+"DOMContentLoaded",
+loadMenuAvailability
+);
+
+}else{
+
+loadMenuAvailability();
+
+}
+
+})();
+
+</script>
 </body>
 
 </html>
